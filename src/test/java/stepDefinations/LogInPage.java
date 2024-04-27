@@ -170,7 +170,8 @@ public class LogInPage {
 	    boolean  dashboard=testSetupManager.pageObjectManager.getlogin().getDashboard();
 	    Assert.assertEquals(dashboard,true );
 	    System.out.println("user is in dashboard page");
-	}
+	    
+	    }
 	
 		
 
