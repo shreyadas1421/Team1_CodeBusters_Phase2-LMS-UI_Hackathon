@@ -14,6 +14,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import utility.TestSetupManager;
 
+import static utility.TestBase.driver;
+
 public class LogInPage {
 
 
@@ -33,7 +35,7 @@ public class LogInPage {
 		
 		@When("Admin gives the correct LMS portal URL")
 		public void admin_gives_the_correct_lms_portal_url() throws IOException {
-			String urlActual=testSetupManager.testbase.WebDriverManager().getCurrentUrl();
+			String urlActual=driver.getCurrentUrl();
 			String urlExpected="https://lms-frontend-api-hackathon-apr-326235f3973d.herokuapp.com/login";
 			Assert.assertEquals(urlActual, urlExpected);
 			System.out.println("launch valid url");

@@ -12,14 +12,19 @@ import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
-public class C_ProgramPOM extends TestBase {
+public class C_ProgramPOM {
 
-//    public WebDriver driver;
+   public WebDriver driver;
 
 //    public C_ProgramPOM(WebDriver driver) {
 //        this.driver = driver;
 //        PageFactory.initElements(driver, this);
 //    }
+
+    public void SetDriver(WebDriver driver) {
+        this.driver= driver;
+        PageFactory.initElements(driver, this);
+    }
 
     @FindBy(xpath = "//button[@id=\"program\"]")
     public WebElement program;
