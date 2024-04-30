@@ -12,12 +12,16 @@ import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
-public class C_ProgramPOM extends TestBase {
-
+public class C_ProgramPOM extends TestBase{
 //    public WebDriver driver;
 
 //    public C_ProgramPOM(WebDriver driver) {
 //        this.driver = driver;
+//        PageFactory.initElements(driver, this);
+//    }
+
+//    public void SetDriver(WebDriver driver) {
+//        this.driver= driver;
 //        PageFactory.initElements(driver, this);
 //    }
 
@@ -44,6 +48,16 @@ public class C_ProgramPOM extends TestBase {
 
     @FindBy(xpath = "//thead[@class='p-datatable-thead']/tr")
     public WebElement tableHeader;
+    @FindBy(xpath = "//div[@class=\"p-dialog-header ng-tns-c132-63 ng-star-inserted\"]")
+    public WebElement newProgramPopup;
+
+    @FindBy(xpath = "//button[@Class='p-button-rounded p-button-danger p-button p-component ng-star-inserted']")
+    public WebElement cancelButtonProgramPopup;
+
+    @FindBy(xpath = "//button[@Class='p-button-rounded p-button-success p-button p-component ng-star-inserted']")
+    public WebElement saveButtonProgramPopup;
+
+
 
 
     public void clickProgramLink() {
@@ -105,22 +119,22 @@ public class C_ProgramPOM extends TestBase {
         return CollectionUtils.containsAll(headerNames, headerNamesFromTableHeader);
     }
 
-//    public boolean columnHeaderWithSortIcon() {
-//        List<String> headerNames = new ArrayList<>();
-//        headerNames.add("Program Name");
-//        headerNames.add("Program Description");
-//        headerNames.add("Program Status");
-//        List<WebElement> headerNamesFromTableHeader = new ArrayList<>();
-//        List<WebElement> tableHeaderElements = tableHeader.findElements(By.xpath("./child::*"));
-//        tableHeaderElements.stream().forEach(x -> headerNamesFromTableHeader.add(x));
-//        headerNamesFromTableHeader.stream().forEach(x -> {
-////            if(x.)
-//            System.out.println(x.getText());
-//            List<WebElement> childElementsEachHeader = x.findElements(By.xpath("./child::*/p-sorticon"));
+    public boolean columnHeaderWithSortIcon() {
+        List<String> headerNames = new ArrayList<>();
+        headerNames.add("Program Name");
+        headerNames.add("Program Description");
+        headerNames.add("Program Status");
+        List<WebElement> headerNamesFromTableHeader = new ArrayList<>();
+        List<WebElement> tableHeaderElements = tableHeader.findElements(By.xpath("./child::*"));
+        tableHeaderElements.stream().forEach(x -> headerNamesFromTableHeader.add(x));
+        headerNamesFromTableHeader.stream().forEach(x -> {
+//            if(x.)
+            System.out.println(x.getText());
+            List<WebElement> childElementsEachHeader = x.findElements(By.xpath("./child::*/p-sorticon"));
 //            CollectionUtils.
-//        });
-//        return Boolean.TRUE;
-//    }
+        });
+        return Boolean.TRUE;
+    }
 
 
     public Boolean isAdminOnManagePramgramPage(){
@@ -130,5 +144,12 @@ public class C_ProgramPOM extends TestBase {
             adminOnManageProgramPage = Boolean.TRUE;
         }
         return adminOnManageProgramPage;
+    }
+
+    public Boolean isSaveAndCancelVisibleInAddProgramPopup(){
+        Boolean saveAndCancelVisibleInAddProgramPopup = Boolean.FALSE;
+        if(cancelButtonProgramPopup != null && saveButtonProgramPopup != null)
+            saveAndCancelVisibleInAddProgramPopup = Boolean.TRUE;
+        return saveAndCancelVisibleInAddProgramPopup;
     }
 }

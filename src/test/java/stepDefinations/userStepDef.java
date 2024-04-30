@@ -27,11 +27,14 @@ import utility.TestBase;
 import utility.TestSetupManager;
 
 public class userStepDef extends E_UserPOM{
+//	public WebDriver driver;
 	   PageObject.A_LoginPOM A_LoginPOM=new PageObject.A_LoginPOM(driver);
 	   String validdata;
 	   String invaliddata;
 	   //String filePath = ;
 		String sheetName = "User";
+
+
 
 	 public userStepDef() {
 	        this.driver = driver;
@@ -41,7 +44,7 @@ public class userStepDef extends E_UserPOM{
 	
 	@Given("Logged on the LMS portal as admin")
 	public void logged_on_the_lms_portal_as_admin() {
-		
+//		Assert.assertEquals(logout.isDisplayed(), true);
 		//if(logout.isDisplayed()) {
         // Assert.assertEquals(logout.isDisplayed(), true);
 		//}
