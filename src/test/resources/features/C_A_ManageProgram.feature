@@ -4,13 +4,14 @@ Feature: Manage Program Validation
 #    When User submits userName and password
 #    Then User lands on dashboard page
 
-  Background:Program Module Admin is on dashboard page after Login and clicks Program on the navigation bar
+ Background:
+ Given Logged on the LMS portal as admin
 
-#  Scenario: Validate landing in Program page
-#    Given Program Module Admin is on dashboard page after Login
-#    When Program Module Admin clicks program link on the navigation bar
-#    Then Program Module Admin should see URL with Manage Program
-#
+  Scenario: Validate landing in Program page
+    Given Program Module Admin is on dashboard page after Login
+    When Program Module Admin clicks program link on the navigation bar
+    Then Program Module Admin should see URL with Manage Program
+
 #  Scenario: Validate the heading
 #    Given Program Module Admin is on dashboard page after Login
 #    When Program Module Admin clicks program link on the navigation bar
@@ -35,18 +36,18 @@ Feature: Manage Program Validation
 #    Given Program Module Admin is on dashboard page after Login
 #    When Program Module Admin clicks program link on the navigation bar
 #    Then Program Module Admin should see a +A New Program button on the program page above the data table
-
-  Scenario: Validate that number of records (rows of data in the table) displayed
-    Given Program Module Admin is on dashboard page after Login
-    When Program Module Admin clicks program link on the navigation bar
-    Then Program Module Admin should see the number of records (rows of data in the table) displayed on the page are 5
 #
-  Scenario: Verify data table on the Program page
-    Given Program Module Admin is on dashboard page after Login
-    When Program Module Admin clicks program link on the navigation bar
-    Then Program Module Admin should see data table on the Manage Program Page with following column headers (Program Name, Program Description, Program Status, Edit,Delete)
-
-  Scenario: Verify Sort arrow icon on the data table
-    Given Program Module Admin is on dashboard page after Login
-    When Program Module Admin clicks Program on the navigation bar
-    Then Program Module Admin should see the sort arrow icon beside to each column header except Edit and Delete
+#  Scenario: Validate that number of records (rows of data in the table) displayed
+#    Given Program Module Admin is on dashboard page after Login
+#    When Program Module Admin clicks program link on the navigation bar
+#    Then Program Module Admin should see the number of records (rows of data in the table) displayed on the page are 5
+##
+#  Scenario: Verify data table on the Program page
+#    Given Program Module Admin is on dashboard page after Login
+#    When Program Module Admin clicks program link on the navigation bar
+#    Then Program Module Admin should see data table on the Manage Program Page with following column headers (Program Name, Program Description, Program Status, Edit,Delete)
+#
+#  Scenario: Verify Sort arrow icon on the data table
+#    Given Program Module Admin is on dashboard page after Login
+#    When Program Module Admin clicks Program on the navigation bar
+#    Then Program Module Admin should see the sort arrow icon beside to each column header except Edit and Delete

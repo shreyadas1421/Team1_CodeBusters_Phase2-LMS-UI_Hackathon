@@ -20,7 +20,7 @@ public class Hooks {
 	@After
 	public void CloseBrowser() throws IOException {
 		//testSetupManager.testbase.WebDriverManager().manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
-		testSetupManager.testbase.WebDriverManager().quit();
+//		testSetupManager.testbase.WebDriverManager().quit();
 		//testSetupManager.webdrivermngr.getDriver().quit();
 	}
 }

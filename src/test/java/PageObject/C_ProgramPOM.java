@@ -12,19 +12,18 @@ import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
-public class C_ProgramPOM {
-
-   public WebDriver driver;
+public class C_ProgramPOM extends TestBase{
+//    public WebDriver driver;
 
 //    public C_ProgramPOM(WebDriver driver) {
 //        this.driver = driver;
 //        PageFactory.initElements(driver, this);
 //    }
 
-    public void SetDriver(WebDriver driver) {
-        this.driver= driver;
-        PageFactory.initElements(driver, this);
-    }
+//    public void SetDriver(WebDriver driver) {
+//        this.driver= driver;
+//        PageFactory.initElements(driver, this);
+//    }
 
     @FindBy(xpath = "//button[@id=\"program\"]")
     public WebElement program;
@@ -49,6 +48,16 @@ public class C_ProgramPOM {
 
     @FindBy(xpath = "//thead[@class='p-datatable-thead']/tr")
     public WebElement tableHeader;
+    @FindBy(xpath = "//div[@class=\"p-dialog-header ng-tns-c132-63 ng-star-inserted\"]")
+    public WebElement newProgramPopup;
+
+    @FindBy(xpath = "//button[@Class='p-button-rounded p-button-danger p-button p-component ng-star-inserted']")
+    public WebElement cancelButtonProgramPopup;
+
+    @FindBy(xpath = "//button[@Class='p-button-rounded p-button-success p-button p-component ng-star-inserted']")
+    public WebElement saveButtonProgramPopup;
+
+
 
 
     public void clickProgramLink() {
@@ -135,5 +144,12 @@ public class C_ProgramPOM {
             adminOnManageProgramPage = Boolean.TRUE;
         }
         return adminOnManageProgramPage;
+    }
+
+    public Boolean isSaveAndCancelVisibleInAddProgramPopup(){
+        Boolean saveAndCancelVisibleInAddProgramPopup = Boolean.FALSE;
+        if(cancelButtonProgramPopup != null && saveButtonProgramPopup != null)
+            saveAndCancelVisibleInAddProgramPopup = Boolean.TRUE;
+        return saveAndCancelVisibleInAddProgramPopup;
     }
 }

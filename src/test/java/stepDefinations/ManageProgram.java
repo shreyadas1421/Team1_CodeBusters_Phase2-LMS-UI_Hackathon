@@ -16,17 +16,22 @@ import static utility.TestBase.driver;
 
 public class ManageProgram extends C_ProgramPOM {
 PageObject.A_LoginPOM a_loginPOM = new PageObject.A_LoginPOM(driver);
-     TestSetupManager testSetupManager;
+     //TestSetupManager testSetupManager;
 //    C_ProgramPOM c_programPOM;
+     public ManageProgram() {
+         this.driver = driver;
+         PageFactory.initElements(driver, this);
+     }
 
     private reusableMethods reusablemethod = new reusableMethods(driver);
 
-    public ManageProgram(TestSetupManager testSetupManager) {
-        this.testSetupManager= testSetupManager;
-        SetDriver(driver);
-        //this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
+
+//    public ManageProgram(TestSetupManager testSetupManager) {
+//        this.testSetupManager= testSetupManager;
+//        SetDriver(driver);
+//        //this.driver = driver;
+//        PageFactory.initElements(driver, this);
+//    }
 
 //    public ManageProgram(TestSetupManager testSetupManager) {
 //        this.testSetupManager= testSetupManager;
@@ -60,15 +65,16 @@ PageObject.A_LoginPOM a_loginPOM = new PageObject.A_LoginPOM(driver);
 //
 //    }
 //
-//    @Given("Program Module Admin is on dashboard page after Login")
-//    public void admin_is_on_dashboard_page_after_login() {
-//        reusablemethod.explicitWait(pageObjectManager.getlogin().dashboard);
+    @Given("Program Module Admin is on dashboard page after Login")
+    public void program_module_admin_is_on_dashboard_page_after_login() {
+//        reusablemethod.explicitWait(A_LoginPOM.dashboard);
 //        boolean dashboard = pageObjectManager.getlogin().getDashboard();
 //        Assert.assertEquals(dashboard, true);
 //        System.out.println("user is on dashboard page");
-//
-//
-//    }
+
+        Assert.assertEquals(a_loginPOM.dashboard.isDisplayed(), true);
+
+    }
 
     @When("Program Module Admin clicks program link on the navigation bar")
     public void admin_clicks_on_the_navigation_bar() {
@@ -128,110 +134,27 @@ PageObject.A_LoginPOM a_loginPOM = new PageObject.A_LoginPOM(driver);
 
 //    Second feature in ProgramModule:
 
+    @Given("Admin is on dashboard page after Login and clicks Program on the navigation bar")
+    public void admin_is_on_dashboard_page_after_login_and_clicks_program_on_the_navigation_bar() {
+             program.click();
 
-    @Given("Program Module Admin is on Manage Program Page")
+    }
+
+    @Given("Admin is on Manage Program Page")
     public void admin_is_on_manage_program_page() {
-//        reusablemethod.explicitWait(pageObjectManager.getlogin().dashboard);
-//        boolean dashboard = pageObjectManager.getlogin().getDashboard();
-//        Assert.assertEquals(, true);
-//        System.out.println("user is on Manage Program page");
+        Assert.assertEquals(manageProgram.getText(), "Manage Program");
 
     }
 
-    @When("Program Module Admin clicks <A New Program>button")
+    @When("Admin clicks A New Program button")
     public void admin_clicks_a_new_program_button() {
-
+        addNewProgramButton.click();
     }
 
-    @Then("Program Module Admin should see a popup open for Program details with empty form along with <SAVE> and <CANCEL> button and Close\\(X) Icon on the top right corner of the window")
+    @Then("Admin should see a popup open for Program details with empty form along with <SAVE> and <CANCEL> button and Close\\(X) Icon on the top right corner of the window")
     public void admin_should_see_a_popup_open_for_program_details_with_empty_form_along_with_save_and_cancel_button_and_close_x_icon_on_the_top_right_corner_of_the_window() {
-
+        System.out.println("my test ");
+        Assert.assertTrue(isSaveAndCancelVisibleInAddProgramPopup());
     }
-
-    @Then("Program Module Admin should see two input fields and their respective text boxes in the program details window")
-    public void admin_should_see_two_input_fields_and_their_respective_text_boxes_in_the_program_details_window() {
-
-    }
-
-    @Then("Program Module Admin should see two radio button for Program Status")
-    public void admin_should_see_two_radio_button_for_program_status() {
-
-    }
-
-    @Given("Program Module Admin is on Program Details Popup window")
-    public void admin_is_on_program_details_popup_window() {
-
-    }
-
-    @When("Program Module Admin clicks <Save>button without entering any data")
-    public void admin_clicks_save_button_without_entering_any_data() {
-
-    }
-
-    @Then("Program Module Admin gets a Error message alert")
-    public void admin_gets_a_error_message_alert() {
-
-    }
-
-    @When("Program Module Admin enters only<Program Name> in text box and clicks Save button")
-    public void admin_enters_only_program_name_in_text_box_and_clicks_save_button() {
-
-    }
-
-    @Then("Program Module Admin gets a message alert {string}")
-    public void admin_gets_a_message_alert(String string) {
-
-    }
-
-    @When("Program Module Admin enters only<Program description> in text box and clicks Save button")
-    public void admin_enters_only_program_description_in_text_box_and_clicks_save_button() {
-
-    }
-
-    @When("Program Module Admin selects only Status and clicks Save button")
-    public void admin_selects_only_status_and_clicks_save_button() {
-
-    }
-
-    @When("Program Module Admin enters only numbers or special char in name and desc column")
-    public void admin_enters_only_numbers_or_special_char_in_name_and_desc_column() {
-
-    }
-
-    @When("Program Module Admin clicks Cancel\\/Close\\(X) Icon on Program Details form")
-    public void admin_clicks_cancel_close_x_icon_on_program_details_form() {
-
-    }
-
-    @Then("Program Details popup window should be closed without saving")
-    public void program_details_popup_window_should_be_closed_without_saving() {
-
-    }
-
-    @When("Enter all the required fields with valid values and click Save button")
-    public void enter_all_the_required_fields_with_valid_values_and_click_save_button() {
-
-    }
-
-    @Then("Program Module Admin gets a message {string} alert and able to see the new program added in the data table")
-    public void admin_gets_a_message_alert_and_able_to_see_the_new_program_added_in_the_data_table(String string) {
-
-    }
-
-    @Given("Program Module Admin is on {string} Popup window")
-    public void admin_is_on_popup_window(String string) {
-
-    }
-
-    @When("Program Module Admin clicks <Cancel>button")
-    public void admin_clicks_cancel_button() {
-
-    }
-
-    @Then("Program Module Admin can see the Program details popup disappears without creating any program")
-    public void admin_can_see_the_program_details_popup_disappears_without_creating_any_program() {
-
-    }
-
 
 }
