@@ -35,8 +35,8 @@ public class PageObjectManager {
 //
 //			return User;
 //		}
-public C_ProgramPOM getProgram(){
-	programPOM = new C_ProgramPOM(driver);
-	return programPOM;
-}
+//public C_ProgramPOM getProgram(){
+//	programPOM = new C_ProgramPOM(driver);
+//	return programPOM;
+//}
 }

@@ -16,10 +16,10 @@ public class C_ProgramPOM extends TestBase {
 
 //    public WebDriver driver;
 
-    public C_ProgramPOM(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
+//    public C_ProgramPOM(WebDriver driver) {
+//        this.driver = driver;
+//        PageFactory.initElements(driver, this);
+//    }
 
     @FindBy(xpath = "//button[@id=\"program\"]")
     public WebElement program;
