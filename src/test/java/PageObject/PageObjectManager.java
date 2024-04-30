@@ -7,6 +7,7 @@ public class PageObjectManager {
 	public WebDriver driver;
 	public A_LoginPOM Login;
 	public B_DashboardPOM Dashboard;
+	public E_UserPOM User;
 	
 	
 	public PageObjectManager(WebDriver driver) {
@@ -27,4 +28,10 @@ public class PageObjectManager {
 		return Dashboard;
 	}
 	
+	public E_UserPOM getUser() {
+			
+			User= new E_UserPOM(driver);
+			
+			return User;
+		}
 }

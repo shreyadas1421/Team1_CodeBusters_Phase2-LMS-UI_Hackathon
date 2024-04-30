@@ -2,6 +2,7 @@ package stepDefinations;
 
 import java.util.List;
 
+import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
@@ -12,6 +13,7 @@ import utility.TestSetupManager;
 public class DashboardPage {
 
 	TestSetupManager testSetupManager;
+	long totalTime;
 
 	public DashboardPage(TestSetupManager testSetupManager) {
 		this.testSetupManager= testSetupManager;
@@ -34,7 +36,8 @@ public class DashboardPage {
 	    	String LMStittle= testSetupManager.pageObjectManager.getDashboard().getLMSTittle();
 		    System.out.println(LMStittle);
 		    Assert.assertEquals(LMStittle,element);
-	    }
+		    
+		    }
 	    
 	}
 	
@@ -53,6 +56,47 @@ public class DashboardPage {
 	    
 	    
 	}
+
+	@When("Admin enter valid credentials & clicks login button  {string} and {int}")
+	public void admin_enter_valid_credentials_clicks_login_button_and(String sheetname, Integer rownum) {
+	    
+		testSetupManager.reusablemethod.explicitWait(testSetupManager.pageObjectManager.getlogin().username);
+		testSetupManager.pageObjectManager.getlogin().userlog(sheetname,rownum);
+		
+		long start = System.currentTimeMillis();
+		System.out.println(start);
+		testSetupManager.pageObjectManager.getlogin().clickSubmit();
+		long finish = System.currentTimeMillis();
+		System.out.println(finish);
+		
+		totalTime = finish - start;
+		System.out.println("Total Time for page load - "+totalTime);
+		
+		
+		
+	}
+	
+	@Then("Maximum navigation time in milliseconds, defaults to {int} seconds")
+	public void maximum_navigation_time_in_milliseconds_defaults_to_seconds(long time) {
+		
+		boolean status =false;
+		if (totalTime >time)
+			status=true;
+		Assert.assertFalse(status);	
+		System.out.println("page loaded");
+		}
+
+	@Then("LMS title should be on the top left corner of page")
+	public void lms_title_should_be_on_the_top_left_corner_of_page() {
+		System.out.println(testSetupManager.pageObjectManager.getDashboard().LMSToolbar.getLocation());
+		
+	}
+	
+	@Then("Admin should see the navigation bar text on the top right side")
+	public void admin_should_see_the_navigation_bar_text_on_the_top_right_side() {
+		System.out.println(testSetupManager.pageObjectManager.getDashboard().LMSToolbar.getLocation());
+	}
+
 
 //Logout
 	

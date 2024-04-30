@@ -26,6 +26,11 @@ public class B_DashboardPOM {
 	@FindBy(xpath="//span[text()=' LMS - Learning Management System ']") 
 	public WebElement LMSTittle;
 	
+	//mat-toolbar[@class='mat-toolbar mat-primary mat-toolbar-single-row ng-star-inserted']
+	
+	@FindBy(xpath="//mat-toolbar[@class='mat-toolbar mat-primary mat-toolbar-single-row ng-star-inserted']") 
+	public WebElement LMSToolbar;
+	
 	@FindBy(xpath="//button[@class='mat-focus-indicator mat-button mat-button-base' or @class='mat-focus-indicator mat-button mat-button-base ng-star-inserted']") 
 	public List<WebElement> navigationelement;
 	
@@ -47,4 +52,13 @@ public class B_DashboardPOM {
 		
 		Logout.click();
 	}
+	
+	/*
+	public void getSpellcheck() {
+		
+		SpellChecker checker = new SpellChecker();
+		SpellResponse spellResponse = checker.check( "helloo worlrd" );
+		for( SpellCorrection sc : spellResponse.getCorrections() )
+		System.out.println( sc.getValue() );
+	}*/
 }
