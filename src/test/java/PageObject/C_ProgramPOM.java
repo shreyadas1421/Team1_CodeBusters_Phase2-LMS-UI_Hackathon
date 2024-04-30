@@ -119,22 +119,22 @@ public class C_ProgramPOM extends TestBase{
         return CollectionUtils.containsAll(headerNames, headerNamesFromTableHeader);
     }
 
-//    public boolean columnHeaderWithSortIcon() {
-//        List<String> headerNames = new ArrayList<>();
-//        headerNames.add("Program Name");
-//        headerNames.add("Program Description");
-//        headerNames.add("Program Status");
-//        List<WebElement> headerNamesFromTableHeader = new ArrayList<>();
-//        List<WebElement> tableHeaderElements = tableHeader.findElements(By.xpath("./child::*"));
-//        tableHeaderElements.stream().forEach(x -> headerNamesFromTableHeader.add(x));
-//        headerNamesFromTableHeader.stream().forEach(x -> {
-////            if(x.)
-//            System.out.println(x.getText());
-//            List<WebElement> childElementsEachHeader = x.findElements(By.xpath("./child::*/p-sorticon"));
+    public boolean columnHeaderWithSortIcon() {
+        List<String> headerNames = new ArrayList<>();
+        headerNames.add("Program Name");
+        headerNames.add("Program Description");
+        headerNames.add("Program Status");
+        List<WebElement> headerNamesFromTableHeader = new ArrayList<>();
+        List<WebElement> tableHeaderElements = tableHeader.findElements(By.xpath("./child::*"));
+        tableHeaderElements.stream().forEach(x -> headerNamesFromTableHeader.add(x));
+        headerNamesFromTableHeader.stream().forEach(x -> {
+//            if(x.)
+            System.out.println(x.getText());
+            List<WebElement> childElementsEachHeader = x.findElements(By.xpath("./child::*/p-sorticon"));
 //            CollectionUtils.
-//        });
-//        return Boolean.TRUE;
-//    }
+        });
+        return Boolean.TRUE;
+    }
 
 
     public Boolean isAdminOnManagePramgramPage(){

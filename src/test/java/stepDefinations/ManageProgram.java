@@ -127,10 +127,10 @@ PageObject.A_LoginPOM a_loginPOM = new PageObject.A_LoginPOM(driver);
 
     }
 
-//    @Then("Program Module Admin should see the sort arrow icon beside to each column header except Edit and Delete")
-//    public void admin_should_see_the_sort_arrow_icon_beside_to_each_column_header_except_edit_and_delete() {
-//        Assert.assertTrue(columnHeaderWithSortIcon());
-//    }
+    @Then("Program Module Admin should see the sort arrow icon beside to each column header except Edit and Delete")
+    public void admin_should_see_the_sort_arrow_icon_beside_to_each_column_header_except_edit_and_delete() {
+        Assert.assertTrue(columnHeaderWithSortIcon());
+    }
 
 //    Second feature in ProgramModule:
 
