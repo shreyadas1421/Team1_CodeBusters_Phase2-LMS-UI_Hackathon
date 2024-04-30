@@ -13,9 +13,9 @@ public class PageObjectManager {
 	}
 
 	public A_LoginPOM getlogin() {
-		
+
 		Login= new A_LoginPOM(driver);
-		
+
 		return Login;
 	}
 	
