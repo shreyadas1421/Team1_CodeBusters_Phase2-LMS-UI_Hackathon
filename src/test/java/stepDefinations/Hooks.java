@@ -32,18 +32,27 @@ public class Hooks {
 		//testSetupManager.webdrivermngr.getDriver().quit();
 	}
 
-	/*
+	
 	@AfterStep
 	public void AddScreenshot(Scenario scenario) throws IOException
 	{
 		WebDriver driver =testSetupManager.testbase.WebDriverManager();
+		
+		if(scenario.isFailed()) {
+			byte[] screenshottaken= ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+			scenario.attach(screenshottaken, "image/png", "errorscreen");
+			
+			
+			}
+		/*
 		if(scenario.isFailed())
 		{
 		//screenshot
+			
 		File sourcePath= 	((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		byte[] fileContent = FileUtils.readFileToByteArray(sourcePath);
 		scenario.attach(fileContent, "image/png", "image");
 		
-		}
-	}*/
+		}*/
+	}
 }
