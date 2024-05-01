@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,8 +17,14 @@ public class A_LoginPOM {
 	public WebDriver driver;
 	Map<String, String> excelmap;
 	public excelDataReader datamap;
-		
+	/*	
 	public A_LoginPOM(WebDriver driver) {
+		this.driver= driver;
+		PageFactory.initElements(driver, this);
+	}*/
+	
+
+	public void SetDriver(WebDriver driver) {
 		this.driver= driver;
 		PageFactory.initElements(driver, this);
 	}
@@ -51,8 +58,10 @@ public void userlog(String sheetname, int rownum) {
 	
 	datamap= new excelDataReader();
 	excelmap=datamap.getTestData(sheetname, rownum);
+	String del = Keys.chord(Keys.CONTROL, "a") + Keys.DELETE;
+	username.clear();
 	username.sendKeys(excelmap.get("username") == null ? "" : excelmap.get("username"));
-	
+	password.clear();
 	password.sendKeys(excelmap.get("password") == null ? "" :excelmap.get("password"));
 
 	
@@ -64,7 +73,11 @@ public void userlogInvalidurl(String sheetname, int rownum) {
 	
 	datamap= new excelDataReader();
 	excelmap=datamap.getTestData(sheetname, rownum);
+	String del = Keys.chord(Keys.CONTROL, "a") + Keys.DELETE;
+	username.clear();
+	
 	username.sendKeys(excelmap.get("username") == null ? "" : excelmap.get("username"));
+	password.clear();
 	
 	password.sendKeys(excelmap.get("password") == null ? "" :excelmap.get("password"));
 
