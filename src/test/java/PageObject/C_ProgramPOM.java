@@ -2,15 +2,11 @@ package PageObject;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utility.TestBase;
 
-import java.sql.SQLOutput;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,11 +62,23 @@ public class C_ProgramPOM extends TestBase{
     @FindBy(xpath = "//input[@id=\"programName\"]")
     public WebElement editProgramName;
 
+    @FindBy(xpath = "//input[@id='programDescription']")
+    public WebElement editProgramDescription;
+
     @FindBy(xpath = "//input[@id=\"filterGlobal\"]")
     public WebElement searchBoxProgram;
 
+    @FindBy(xpath = "//div[@class=\"p-radiobutton p-component p-radiobutton-checked\"]")
+    public WebElement statusActiveIconProgram;
 
+    @FindBy(xpath = "//div[@class=\"p-radiobutton-box\"]")
+    public WebElement unselectedStatusCheckboxProgram;
 
+    @FindBy(xpath = "//button[@label=\"Cancel\"]")
+    public WebElement cancelButtonProgram;
+
+    @FindBy(xpath = "//button[@label=\"Save\"]")
+    public WebElement saveButtonProgram;
 
     public void clickProgramLink() {
         program.click();
@@ -195,8 +203,59 @@ public class C_ProgramPOM extends TestBase{
     }
 
     public void updateSearchProgram(){
-        searchBoxProgram.sendKeys("lmskb001");
+        searchBoxProgram.clear();
+        searchBoxProgram.sendKeys("lmskb007");
+        try {
+
+            wait.wait(3000l);
+        }catch (Exception exception){
+            System.out.println(exception.getStackTrace());
+        }
         programEditButton.click();
+    }
+
+    public void editProgramName_Description_SpecialCharacters(){
+        editProgramName.sendKeys("&^%&^%&^*^%$^%");
+        editProgramDescription.sendKeys("*&^&*^*&@@#%$");
+    }
+
+    public void editProgramDescriptionField(){
+        editProgramDescription.sendKeys(editProgramDescription.getText().concat("1"));
+    }
+
+    public void editStatusIconProgram(){
+        unselectedStatusCheckboxProgram.click();
+    }
+
+    public void disappearEditPopupBox(){
+        cancelButtonProgramPopup.click();
+    }
+
+    // TODO: 5/1/2024 Add logic to verify the propram details being modified
+    public boolean isEditPopupVisibleAndContentsChanged(){
+        Boolean editPopUpDisappearedAndContentNotChanges = Boolean.TRUE;
+        WebElement popup = null;
+        try
+        {
+//            popup = driver.findElement(By.xpath("//div[@class=\"ng-trigger ng-trigger-animation ng-tns-c132-3 p-fluid p-dialog p-component p-dialog-draggable p-dialog-resizable ng-star-inserted\"]"));
+            popup = driver.findElement(By.xpath("//div[@class='ng-trigger ng-trigger-animation ng-tns-c132-3 p-fluid p-dialog p-component p-dialog-draggable p-dialog-resizable ng-star-inserted']"));
+        }
+        catch (Exception exception){
+            editPopUpDisappearedAndContentNotChanges = Boolean.FALSE;
+        }
+        return editPopUpDisappearedAndContentNotChanges;
+    }
+
+    public void clickSavebuttonProgram(){
+        saveButtonProgram.click();
+    }
+
+    public void getSuccessMessageAfterClickEditSavebutton(){
+        searchBoxProgram.sendKeys("lmskb007");
+        editProgramNamefield();
+        editProgramDescriptionField();
+        saveButtonProgram.click();
+
     }
 
 }
