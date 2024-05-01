@@ -6,13 +6,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utility.TestBase;
 
 import java.sql.SQLOutput;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 public class C_ProgramPOM extends TestBase{
+    String actualMsg = "";
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
 //    public WebDriver driver;
 
 //    public C_ProgramPOM(WebDriver driver) {
@@ -57,11 +62,17 @@ public class C_ProgramPOM extends TestBase{
     @FindBy(xpath = "//button[@Class='p-button-rounded p-button-success p-button p-component ng-star-inserted']")
     public WebElement saveButtonProgramPopup;
 
-    @FindBy(xpath = "//button[@class='ng-tns-c132-3 p-dialog-header-icon p-dialog-header-close p-link p-ripple ng-star-inserted']")
+    @FindBy(xpath = "//button[contains(@class,'p-dialog-header-icon p-dialog-header-close')]")
     public WebElement closeIconProgramPopup;
 
     @FindBy(xpath = "//small[@class='p-invalid ng-star-inserted']")
     public WebElement errorMessagesAddProgramPopup;
+
+    @FindBy(xpath="//button[@icon='pi pi-pencil']")
+    public WebElement programEditButton;
+
+    @FindBy(xpath = "//div[@class=\"ng-trigger ng-trigger-animation ng-tns-c132-3 p-fluid p-dialog p-component p-dialog-draggable p-dialog-resizable ng-star-inserted\"]")
+    public WebElement editPopUp;
 
 
 
@@ -173,5 +184,18 @@ public class C_ProgramPOM extends TestBase{
         if(cancelButtonProgramPopup != null && saveButtonProgramPopup != null)
             saveAndCancelVisibleInAddProgramPopup = Boolean.TRUE;
         return saveAndCancelVisibleInAddProgramPopup;
+    }
+
+    public void closeEditProgramPopup(){
+        closeIconProgramPopup.click();
+    }
+
+    public String programCreationMsgValidation() throws InterruptedException {
+        WebElement msg = driver.findElement(By.xpath("//p-toast//div[contains(@class, 'p-toast-detail')]"));
+
+        System.out.println("actual msg: "+actualMsg);
+        wait.until(ExpectedConditions.invisibilityOf(msg));
+        actualMsg=msg.getText();
+        return actualMsg;
     }
 }

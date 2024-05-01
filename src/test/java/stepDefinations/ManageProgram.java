@@ -162,18 +162,20 @@ PageObject.A_LoginPOM a_loginPOM = new PageObject.A_LoginPOM(driver);
 
     @Given("Admin is on Manage Program Page after clicks Program on the navigation bar")
     public void admin_is_on_manage_program_page_after_clicks_program_on_the_navigation_bar() {
-
+        Assert.assertEquals(manageProgram.getText(), "Manage Program");
 
     }
 
     @When("Admin clicks Edit button on the data table for any row")
     public void admin_clicks_edit_button_on_the_data_table_for_any_row() {
-
+        programEditButton.click();
 
     }
 
     @Then("Admin should see a popup open for Program details to edit")
     public void admin_should_see_a_popup_open_for_program_details_to_edit() {
+        Assert.assertTrue(editPopUp.isDisplayed());
+        closeEditProgramPopup();
 
 
     }
@@ -347,6 +349,23 @@ PageObject.A_LoginPOM a_loginPOM = new PageObject.A_LoginPOM(driver);
     @Then("Admin can see the Program details popup disappears without creating any program")
     public void admin_can_see_the_program_details_popup_disappears_without_creating_any_program() {
         
+    }
+    @Then("Admin gets a message Successful Program Updated alert and able to see the updated name in the table for the particular program")
+    public void admin_gets_a_message_successful_program_updated_alert_and_able_to_see_the_updated_name_in_the_table_for_the_particular_program() throws InterruptedException {
+
+        Assert.assertEquals(programCreationMsgValidation(), "Program Updated");
+    }
+
+    @Then("Admin gets a message Successful Program Updated alert and able to see the updated description in the table for the particular program")
+    public void admin_gets_a_message_successful_program_updated_alert_and_able_to_see_the_updated_description_in_the_table_for_the_particular_program() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @Then("Admin gets a message Successful Program Updated alert and able to see the updated status in the table for the particular program")
+    public void admin_gets_a_message_successful_program_updated_alert_and_able_to_see_the_updated_status_in_the_table_for_the_particular_program() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
     }
 
 
