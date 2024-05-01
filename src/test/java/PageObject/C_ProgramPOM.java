@@ -57,11 +57,33 @@ public class C_ProgramPOM extends TestBase{
     @FindBy(xpath = "//button[@Class='p-button-rounded p-button-success p-button p-component ng-star-inserted']")
     public WebElement saveButtonProgramPopup;
 
+    @FindBy(xpath = "//button[@class='ng-tns-c132-3 p-dialog-header-icon p-dialog-header-close p-link p-ripple ng-star-inserted']")
+    public WebElement closeIconProgramPopup;
+
+    @FindBy(xpath = "//small[@class='p-invalid ng-star-inserted']")
+    public WebElement errorMessagesAddProgramPopup;
+
 
 
 
     public void clickProgramLink() {
         program.click();
+    }
+
+    public void clickAddNewProgramButton(){
+        addNewProgramButton.click();
+    }
+
+    public void clickSaveButtonOnAddProgramPopup(){
+        saveButtonProgramPopup.click();
+    }
+
+    public boolean errorMessagesOnAddProgramPopup(){
+        Boolean errorMessagesOnAddProgramPopup = Boolean.FALSE;
+        if (errorMessagesAddProgramPopup != null){
+            errorMessagesOnAddProgramPopup = Boolean.TRUE;
+        }
+        return errorMessagesOnAddProgramPopup;
     }
 
     public boolean manageProgramIsVisible() {

@@ -7,9 +7,12 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import utility.TestSetupManager;
 import utility.reusableMethods;
+
+import java.time.Duration;
 
 import static utility.TestBase.driver;
 //import utility.TestSetupManager;
@@ -78,12 +81,14 @@ PageObject.A_LoginPOM a_loginPOM = new PageObject.A_LoginPOM(driver);
 
     @When("Program Module Admin clicks program link on the navigation bar")
     public void admin_clicks_on_the_navigation_bar() {
+
         clickProgramLink();
     }
 
     @Then("Program Module Admin should see URL with Manage Program")
     public void admin_should_see_url_with() {
         Assert.assertEquals(manageProgramIsVisible(), true);
+        closeIconProgramPopup.click();
     }
 
 
@@ -136,8 +141,8 @@ PageObject.A_LoginPOM a_loginPOM = new PageObject.A_LoginPOM(driver);
 
     @Given("Admin is on dashboard page after Login and clicks Program on the navigation bar")
     public void admin_is_on_dashboard_page_after_login_and_clicks_program_on_the_navigation_bar() {
-             program.click();
-
+//        reusablemethod.explicitWait(program);
+        program.click();
     }
 
     @Given("Admin is on Manage Program Page")
@@ -171,20 +176,18 @@ PageObject.A_LoginPOM a_loginPOM = new PageObject.A_LoginPOM(driver);
 
     @Given("Admin is on Program Details Popup window")
     public void admin_is_on_program_details_popup_window() {
-        
-        
+        clickAddNewProgramButton();
     }
 
     @When("Admin clicks Save button without entering any data")
     public void admin_clicks_save_button_without_entering_any_data() {
-        
-        
+        System.out.println("admin_clicks_save_button_without_entering_any_data");
+        clickSaveButtonOnAddProgramPopup();
     }
 
     @Then("Admin gets a Error message alert")
     public void admin_gets_a_error_message_alert() {
-        
-        
+        Assert.assertTrue(errorMessagesOnAddProgramPopup());
     }
 
     @When("Admin enters only Program Name in text box and clicks Save button")
