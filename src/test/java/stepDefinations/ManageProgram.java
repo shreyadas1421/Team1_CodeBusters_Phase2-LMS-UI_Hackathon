@@ -217,18 +217,6 @@ PageObject.A_LoginPOM a_loginPOM = new PageObject.A_LoginPOM(driver);
 
     }
 
-    @When("Admin enters only numbers or special char in name and desc column")
-    public void admin_enters_only_numbers_or_special_char_in_name_and_desc_column() {
-
-
-    }
-
-    @Then("Admin gets a Error message alert")
-    public void admin_gets_a_error_message_alert() {
-
-
-    }
-
     @When("Admin clicks Cancel button on edit popup")
     public void admin_clicks_cancel_button_on_edit_popup() {
 
