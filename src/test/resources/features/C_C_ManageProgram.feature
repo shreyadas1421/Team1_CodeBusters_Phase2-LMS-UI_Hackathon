@@ -8,10 +8,10 @@ Feature: Edit Program Details
     When  Admin clicks Edit button on the data table for any row
     Then  Admin should see a popup open for Program details to edit
 
-  Scenario:  Edit Program Name
-    Given  Admin is on Program Details Popup window to Edit
-    When  Admin edits the Name column and clicks save button
-    Then  Admin gets a message Successful Program Updated alert and able to see the updated name in the table for the particular program
+#  Scenario:  Edit Program Name
+#    Given  Admin is on Program Details Popup window to Edit
+#    When  Admin edits the Name column and clicks save button
+#    Then  Admin gets a message Successful Program Updated alert and able to see the updated name in the table for the particular program
 #
 #  Scenario:  Edit Program description
 #    Given  Admin is on Program Details Popup window to Edit

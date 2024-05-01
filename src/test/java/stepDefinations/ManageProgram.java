@@ -158,6 +158,8 @@ PageObject.A_LoginPOM a_loginPOM = new PageObject.A_LoginPOM(driver);
     public void admin_should_see_a_popup_open_for_program_details_with_empty_form_along_with_save_and_cancel_button_and_close_x_icon_on_the_top_right_corner_of_the_window() {
         System.out.println("my test ");
         Assert.assertTrue(isSaveAndCancelVisibleInAddProgramPopup());
+
+        closeEditProgramPopup();
     }
 
     @Given("Admin is on Manage Program Page after clicks Program on the navigation bar")
