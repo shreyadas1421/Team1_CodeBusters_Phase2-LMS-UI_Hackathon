@@ -18,17 +18,6 @@ import java.util.List;
 public class C_ProgramPOM extends TestBase{
     String actualMsg = "";
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
-//    public WebDriver driver;
-
-//    public C_ProgramPOM(WebDriver driver) {
-//        this.driver = driver;
-//        PageFactory.initElements(driver, this);
-//    }
-
-//    public void SetDriver(WebDriver driver) {
-//        this.driver= driver;
-//        PageFactory.initElements(driver, this);
-//    }
 
     @FindBy(xpath = "//button[@id=\"program\"]")
     public WebElement program;
@@ -73,6 +62,12 @@ public class C_ProgramPOM extends TestBase{
 
     @FindBy(xpath = "//div[@class=\"ng-trigger ng-trigger-animation ng-tns-c132-3 p-fluid p-dialog p-component p-dialog-draggable p-dialog-resizable ng-star-inserted\"]")
     public WebElement editPopUp;
+
+    @FindBy(xpath = "//input[@id=\"programName\"]")
+    public WebElement editProgramName;
+
+    @FindBy(xpath = "//input[@id=\"filterGlobal\"]")
+    public WebElement searchBoxProgram;
 
 
 
@@ -192,10 +187,16 @@ public class C_ProgramPOM extends TestBase{
 
     public String programCreationMsgValidation() throws InterruptedException {
         WebElement msg = driver.findElement(By.xpath("//p-toast//div[contains(@class, 'p-toast-detail')]"));
-
-        System.out.println("actual msg: "+actualMsg);
-        wait.until(ExpectedConditions.invisibilityOf(msg));
         actualMsg=msg.getText();
         return actualMsg;
     }
+    public void editProgramNamefield(){
+        editProgramName.sendKeys(editProgramName.getText().concat("1"));
+    }
+
+    public void updateSearchProgram(){
+        searchBoxProgram.sendKeys("lmskb001");
+        programEditButton.click();
+    }
+
 }

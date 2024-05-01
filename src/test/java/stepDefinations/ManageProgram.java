@@ -168,8 +168,7 @@ PageObject.A_LoginPOM a_loginPOM = new PageObject.A_LoginPOM(driver);
 
     @When("Admin clicks Edit button on the data table for any row")
     public void admin_clicks_edit_button_on_the_data_table_for_any_row() {
-        programEditButton.click();
-
+        updateSearchProgram();
     }
 
     @Then("Admin should see a popup open for Program details to edit")
@@ -182,20 +181,14 @@ PageObject.A_LoginPOM a_loginPOM = new PageObject.A_LoginPOM(driver);
 
     @Given("Admin is on Program Details Popup window to Edit")
     public void admin_is_on_program_details_popup_window_to_edit() {
-
+        programEditButton.click();
 
     }
 
     @When("Admin edits the Name column and clicks save button")
     public void admin_edits_the_name_column_and_clicks_save_button() {
-
-
-    }
-
-    @Then("Admin gets a message {string} alert and able to see the updated name in the table for the particular program")
-    public void admin_gets_a_message_alert_and_able_to_see_the_updated_name_in_the_table_for_the_particular_program(String string) {
-
-
+        editProgramNamefield();
+        clickSaveButtonOnAddProgramPopup();
     }
 
     @When("Admin edits the Description column and clicks save button")
@@ -352,7 +345,6 @@ PageObject.A_LoginPOM a_loginPOM = new PageObject.A_LoginPOM(driver);
     }
     @Then("Admin gets a message Successful Program Updated alert and able to see the updated name in the table for the particular program")
     public void admin_gets_a_message_successful_program_updated_alert_and_able_to_see_the_updated_name_in_the_table_for_the_particular_program() throws InterruptedException {
-
         Assert.assertEquals(programCreationMsgValidation(), "Program Updated");
     }
 
