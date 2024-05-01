@@ -10,6 +10,8 @@ import utility.reusableMethods;
 //import utility.TestSetupManager;
 
 public class ManageProgram extends C_ProgramPOM {
+
+
     private final reusableMethods reusablemethod = new reusableMethods(driver);
     PageObject.A_LoginPOM a_loginPOM = new PageObject.A_LoginPOM(driver);
 
@@ -260,48 +262,49 @@ public class ManageProgram extends C_ProgramPOM {
 
     @When("Admin enters only Program Name in text box and clicks Save button")
     public void admin_enters_only_program_name_in_text_box_and_clicks_save_button() {
-
-
+        addProgramNameField("lmskb001");
+        clickSaveButtonOnAddProgramPopup();
     }
 
     @Then("Admin gets a message alert Description is required")
     public void admin_gets_a_message_alert_description_is_required() {
-
-
+        Assert.assertTrue(checkForErrorMessage("Description is required."));
+        closeEditProgramPopup();
     }
+
+
+//    @When("Enter all the required fields with valid values by reading through excel {string}, {integer} and click Save button")
+//    public void enter_all_the_required_fields_with_valid_values_by_reading_through_excel_and_click_save_button(String sheetName, String rowNumber) {
+//
+//    }
 
     @When("Admin enters only Program description in text box and clicks Save button")
     public void admin_enters_only_program_description_in_text_box_and_clicks_save_button() {
-
-
+        addProgramDescriptionField("lmskb001");
+        clickSaveButtonOnAddProgramPopup();
     }
 
     @Then("Admin gets a message alert Name is required")
     public void admin_gets_a_message_alert_name_is_required() {
-
-
+        Assert.assertTrue(checkForErrorMessage("Program name is required."));
+        closeEditProgramPopup();
     }
 
     @When("Admin selects only Status and clicks Save button")
     public void admin_selects_only_status_and_clicks_save_button() {
-
-
+        clickOnRadioButtonOnManageProgramPopup("Active");
+        clickSaveButtonOnAddProgramPopup();
     }
 
-    @Then("Admin gets a message alert {string}")
-    public void admin_gets_a_message_alert(String string) {
-
-
+    @Then("Admin gets a message alert Name and Description required")
+    public void admin_gets_a_message_alert() {
+        Assert.assertTrue(checkForErrorMessage("Program name is required."));
+        Assert.assertTrue(checkForErrorMessage("Description is required."));
+        closeEditProgramPopup();
     }
 
     @When("Admin enters only numbers or special char in name and desc column")
     public void admin_enters_only_numbers_or_special_char_in_name_and_desc_column() {
-
-
-    }
-
-    @When("Admin clicks Cancel\\/Close\\(X) Icon on Program Details form")
-    public void admin_clicks_cancel_close_x_icon_on_program_details_form() {
 
 
     }
@@ -351,5 +354,22 @@ public class ManageProgram extends C_ProgramPOM {
         Assert.assertEquals(programCreationMsgValidation(), "Program Updated");
     }
 
+    @When("Enter all the required fields with valid values by reading through excel {string}, {string} and click Save button")
+    public void enterAllTheRequiredFieldsWithValidValuesByReadingThroughExcelAndClickSaveButton(String sheetName, String rowNumber) {
+        System.out.println(sheetName);
+        System.out.println(rowNumber);
+        readProgramInfoFromExcel(sheetName, Integer.parseInt(rowNumber));
+        clickSavebuttonProgram();
+    }
+
+    @When("Admin clicks Cancel\\/Close\\(X) Icon on Program Details form")
+    public void adminClicksCancelCloseXIconOnProgramDetailsForm() {
+        closeEditProgramPopup();
+    }
+
+//    @When("Enter all the required fields with valid values by reading through excel {string}, {int} and click Save button")
+//    public void enterAllTheRequiredFieldsWithValidValuesByReadingThroughExcelRowNumberAndClickSaveButton(String sheetName, Integer rowNumber) {
+//        readProgramInfoFromExcel(sheetName, rowNumber);
+//    }
 
 }

@@ -1,11 +1,7 @@
 Feature: Manage Program Validation
-#  Background: Logged on the LMS portal asProgram Module Admin
-#    Given Logged on the LMS portal asProgram Module Admin
-#    When User submits userName and password
-#    Then User lands on dashboard page
 
- Background:
- Given Logged on the LMS portal as admin
+  Background:
+    Given Logged on the LMS portal as admin
 
   Scenario: Validate landing in Program page
     Given Program Module Admin is on dashboard page after Login
@@ -21,7 +17,7 @@ Feature: Manage Program Validation
     Given Program Module Admin is on dashboard page after Login
     When Program Module Admin clicks program link on the navigation bar
     Then Program Module Admin should see the text as Showing x to y of z entries along with Pagination icon below the table.x- starting record number on that page.y-ending record number on that page.z-Total number of records
-## Tobe tested
+
   Scenario: Validate the footer
     Given Program Module Admin is on dashboard page after Login
     When Program Module Admin clicks program link on the navigation bar
