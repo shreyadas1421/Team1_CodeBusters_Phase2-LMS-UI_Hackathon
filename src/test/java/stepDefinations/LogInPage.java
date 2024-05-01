@@ -54,7 +54,7 @@ public class LogInPage extends A_LoginPOM {
 			{		//getTittle();
 					//System.out.println(LogInPageTittle);
 					Assert.assertEquals(getTittle(),true );
-					System.out.println("Page Tittle validated");
+				//	System.out.println("Page Tittle validated");
 					}
 		
 				else if(element.equalsIgnoreCase("logo"))
@@ -62,25 +62,25 @@ public class LogInPage extends A_LoginPOM {
 					//boolean  logo=testSetupManager.pageObjectManager.getlogin().getLogo();
 					//System.out.println(LogInPageTittle);
 					Assert.assertEquals(getLogo(),true );
-					System.out.println("Logo validated");
+				//	System.out.println("Logo validated");
 				}
 				else if(element.equalsIgnoreCase("LoginText"))
 				{
 					//boolean  LoginText=testSetupManager.pageObjectManager.getlogin().getText();
 					//System.out.println(LogInPageTittle);
 					Assert.assertEquals(getText(),true );
-					System.out.println("Text field of login details validated");
+				//	System.out.println("Text field of login details validated");
 				}
 				else if (element.equalsIgnoreCase("countofTxtField"))
 				{
 					//int count=testSetupManager.pageObjectManager.getlogin().getTextboxcount();
 					Assert.assertEquals(getTextboxcount(),2 );
-					System.out.println(getTextboxcount());
+				//	System.out.println(getTextboxcount());
 				}else if(element.equalsIgnoreCase("Login"))
 				{
 					//boolean  LoginButton=testSetupManager.pageObjectManager.getlogin().getLoginbutton();
 					Assert.assertEquals(getLoginbutton(),true );
-					System.out.println("LoginButton is present");
+				//	System.out.println("LoginButton is present");
 				}else if(element.equalsIgnoreCase("User"))
 				{
 					String user=username.getAttribute("data-placeholder");
@@ -90,10 +90,12 @@ public class LogInPage extends A_LoginPOM {
 					
 					String rgbFormat = username.getCssValue("color");
 
-					System.out.println(rgbFormat);     //In RGB Format the value will be print
+				//	System.out.println(rgbFormat);     //In RGB Format the value will be print
 
 					String hexcolor = Color.fromString(rgbFormat).asHex(); //converted Into HexFormat
-					System.out.println(hexcolor);// Output of Hex code
+					String actualcolor="#808080";
+					Assert.assertEquals(hexcolor, actualcolor);
+				//	System.out.println(hexcolor);// Output of Hex code
 					
 				}else if(element.equalsIgnoreCase("Password"))
 				{
@@ -104,10 +106,12 @@ public class LogInPage extends A_LoginPOM {
 					
 					String rgbFormat = password.getCssValue("color");
 
-					System.out.println(rgbFormat);     //In RGB Format the value will be print
+				//	System.out.println(rgbFormat);     //In RGB Format the value will be print
 
 					String hexcolor = Color.fromString(rgbFormat).asHex(); //converted Into HexFormat
-					System.out.println(hexcolor);// Output of Hex code
+					String actualcolor="#808080";
+					Assert.assertEquals(hexcolor, actualcolor);
+				//	System.out.println(hexcolor);// Output of Hex code
 					
 				}
 					
