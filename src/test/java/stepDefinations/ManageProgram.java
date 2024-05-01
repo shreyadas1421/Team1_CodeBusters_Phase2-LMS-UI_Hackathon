@@ -15,14 +15,13 @@ import static utility.TestBase.driver;
 //import utility.TestSetupManager;
 
 public class ManageProgram extends C_ProgramPOM {
-    PageObject.A_LoginPOM a_loginPOM = new PageObject.A_LoginPOM(driver);
-
-    //TestSetupManager testSetupManager;
+PageObject.A_LoginPOM a_loginPOM = new PageObject.A_LoginPOM(driver);
+     //TestSetupManager testSetupManager;
 //    C_ProgramPOM c_programPOM;
-    public ManageProgram() {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
+     public ManageProgram() {
+         this.driver = driver;
+         PageFactory.initElements(driver, this);
+     }
 
     private reusableMethods reusablemethod = new reusableMethods(driver);
 
@@ -38,7 +37,7 @@ public class ManageProgram extends C_ProgramPOM {
 //        this.testSetupManager= testSetupManager;
 //    }
 
-    //    @Given("Logged on the LMS portal as Admin")
+//    @Given("Logged on the LMS portal as Admin")
 //    public void logged_on_the_lms_portal_as_admin() {
 //        reusablemethod.explicitWait(pageObjectManager.getlogin().username);
 //
@@ -137,7 +136,7 @@ public class ManageProgram extends C_ProgramPOM {
 
     @Given("Admin is on dashboard page after Login and clicks Program on the navigation bar")
     public void admin_is_on_dashboard_page_after_login_and_clicks_program_on_the_navigation_bar() {
-        program.click();
+             program.click();
 
     }
 
@@ -250,6 +249,114 @@ public class ManageProgram extends C_ProgramPOM {
 
     @Then("Admin gets a message Successful Program Updated alert and able to see the updated details in the table for the particular program")
     public void admin_gets_a_message_successful_program_updated_alert_and_able_to_see_the_updated_details_in_the_table_for_the_particular_program() {
+
+    }
+
+
+    @Then("Admin should see two input fields and their respective text boxes in the program details window")
+    public void admin_should_see_two_input_fields_and_their_respective_text_boxes_in_the_program_details_window() {
+
+
+    }
+
+    @Then("Admin should see two radio button for Program Status")
+    public void admin_should_see_two_radio_button_for_program_status() {
+
+
+    }
+
+    @Given("Admin is on Program Details Popup window")
+    public void admin_is_on_program_details_popup_window() {
+
+
+    }
+
+    @When("Admin clicks Save button without entering any data")
+    public void admin_clicks_save_button_without_entering_any_data() {
+
+
+    }
+
+    @Then("Admin gets a Error message alert")
+    public void admin_gets_a_error_message_alert() {
+
+
+    }
+
+    @When("Admin enters only Program Name in text box and clicks Save button")
+    public void admin_enters_only_program_name_in_text_box_and_clicks_save_button() {
+
+
+    }
+
+    @Then("Admin gets a message alert Description is required")
+    public void admin_gets_a_message_alert_description_is_required() {
+
+
+    }
+
+    @When("Admin enters only Program description in text box and clicks Save button")
+    public void admin_enters_only_program_description_in_text_box_and_clicks_save_button() {
+
+
+    }
+
+    @Then("Admin gets a message alert Name is required")
+    public void admin_gets_a_message_alert_name_is_required() {
+
+
+    }
+
+    @When("Admin selects only Status and clicks Save button")
+    public void admin_selects_only_status_and_clicks_save_button() {
+
+
+    }
+
+    @Then("Admin gets a message alert {string}")
+    public void admin_gets_a_message_alert(String string) {
+
+
+    }
+
+    @When("Admin enters only numbers or special char in name and desc column")
+    public void admin_enters_only_numbers_or_special_char_in_name_and_desc_column() {
+
+
+    }
+
+    @When("Admin clicks Cancel\\/Close\\(X) Icon on Program Details form")
+    public void admin_clicks_cancel_close_x_icon_on_program_details_form() {
+
+
+    }
+
+    @Then("Program Details popup window should be closed without saving")
+    public void program_details_popup_window_should_be_closed_without_saving() {
+
+
+    }
+
+    @When("Enter all the required fields with valid values and click Save button")
+    public void enter_all_the_required_fields_with_valid_values_and_click_save_button() {
+
+
+    }
+
+    @Then("Admin gets a message {string} alert and able to see the new program added in the data table")
+    public void admin_gets_a_message_alert_and_able_to_see_the_new_program_added_in_the_data_table(String string) {
+
+
+    }
+
+    @When("Admin clicks <Cancel>button")
+    public void admin_clicks_cancel_button() {
+
+
+    }
+
+    @Then("Admin can see the Program details popup disappears without creating any program")
+    public void admin_can_see_the_program_details_popup_disappears_without_creating_any_program() {
 
     }
 
