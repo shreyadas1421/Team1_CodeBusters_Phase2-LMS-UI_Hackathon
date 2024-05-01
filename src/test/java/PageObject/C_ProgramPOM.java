@@ -1,6 +1,7 @@
 package PageObject;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.poi.util.StringUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -79,6 +80,15 @@ public class C_ProgramPOM extends TestBase{
 
     @FindBy(xpath = "//button[@label=\"Save\"]")
     public WebElement saveButtonProgram;
+
+    @FindBy(xpath = "//input[@id='programName']")
+    public WebElement programDetailNameTextBox;
+
+    @FindBy(xpath = "//input[@id='programDescription']")
+    public WebElement programDetailDescriptionTextBox;
+
+    @FindBy(xpath = "//div[@class='ng-star-inserted']")
+    public WebElement programDetailRadioButtons;
 
     public void clickProgramLink() {
         program.click();
@@ -219,6 +229,18 @@ public class C_ProgramPOM extends TestBase{
         editProgramDescription.sendKeys("*&^&*^*&@@#%$");
     }
 
+    public void addProgramAllfieldsValidValues(){
+        String randomString = randomEndForValue();
+        editProgramName.sendKeys("lmskb001"+ randomString);
+        editProgramDescription.sendKeys("lmskb001"+ randomString);
+        editStatusIconProgram();
+    }
+
+    public String randomEndForValue(){
+        String randomString =  String.valueOf(Math.random()).replace(".","").substring(0,5);
+        return randomString;
+    }
+
     public void editProgramDescriptionField(){
         editProgramDescription.sendKeys(editProgramDescription.getText().concat("1"));
     }
@@ -256,6 +278,18 @@ public class C_ProgramPOM extends TestBase{
         editProgramDescriptionField();
         saveButtonProgram.click();
 
+    }
+    public boolean programNameAndDescriptionTextBoxVisible(){
+        boolean isProgramNameAndDescriptionTextBoxVisible = Boolean.FALSE;
+        if (programDetailDescriptionTextBox != null && programDetailNameTextBox != null){
+            isProgramNameAndDescriptionTextBoxVisible = Boolean.TRUE;
+        }
+        return isProgramNameAndDescriptionTextBoxVisible;
+    }
+
+    public int numberOfRadioButtonsOnAddProgramPopup(){
+        List<WebElement> list = driver.findElements(By.xpath("//div[@class='ng-star-inserted']"));
+        return list.size();
     }
 
 }

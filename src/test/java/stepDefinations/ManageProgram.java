@@ -132,7 +132,6 @@ public class ManageProgram extends C_ProgramPOM {
     @Given("Admin is on dashboard page after Login and clicks Program on the navigation bar")
     public void admin_is_on_dashboard_page_after_login_and_clicks_program_on_the_navigation_bar() {
         program.click();
-
     }
 
     @Given("Admin is on Manage Program Page")
@@ -143,14 +142,13 @@ public class ManageProgram extends C_ProgramPOM {
 
     @When("Admin clicks A New Program button")
     public void admin_clicks_a_new_program_button() {
-        addNewProgramButton.click();
+        clickAddNewProgramButton();
     }
 
     @Then("Admin should see a popup open for Program details with empty form along with <SAVE> and <CANCEL> button and Close\\(X) Icon on the top right corner of the window")
     public void admin_should_see_a_popup_open_for_program_details_with_empty_form_along_with_save_and_cancel_button_and_close_x_icon_on_the_top_right_corner_of_the_window() {
         System.out.println("my test ");
         Assert.assertTrue(isSaveAndCancelVisibleInAddProgramPopup());
-
         closeEditProgramPopup();
     }
 
@@ -233,14 +231,14 @@ public class ManageProgram extends C_ProgramPOM {
 
     @Then("Admin should see two input fields and their respective text boxes in the program details window")
     public void admin_should_see_two_input_fields_and_their_respective_text_boxes_in_the_program_details_window() {
-
-
+        Assert.assertTrue(programNameAndDescriptionTextBoxVisible());
+        closeEditProgramPopup();
     }
 
     @Then("Admin should see two radio button for Program Status")
     public void admin_should_see_two_radio_button_for_program_status() {
-
-
+        Assert.assertEquals(2, numberOfRadioButtonsOnAddProgramPopup());
+        closeEditProgramPopup();
     }
 
     @Given("Admin is on Program Details Popup window")
@@ -316,13 +314,14 @@ public class ManageProgram extends C_ProgramPOM {
 
     @When("Enter all the required fields with valid values and click Save button")
     public void enter_all_the_required_fields_with_valid_values_and_click_save_button() {
-
+        addProgramAllfieldsValidValues();
+        clickSavebuttonProgram();
 
     }
 
-    @Then("Admin gets a message {string} alert and able to see the new program added in the data table")
-    public void admin_gets_a_message_alert_and_able_to_see_the_new_program_added_in_the_data_table(String string) {
-
+    @Then("Admin gets a message Successful Program Created alert and able to see the new program added in the data table")
+    public void admin_gets_a_message_alert_and_able_to_see_the_new_program_added_in_the_data_table() throws InterruptedException {
+        Assert.assertEquals(programCreationMsgValidation(), "Program Created Successfully");
 
     }
 

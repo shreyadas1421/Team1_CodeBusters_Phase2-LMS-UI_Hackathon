@@ -7,7 +7,7 @@ Feature: Add New Program
 #    Given Admin is on Manage Program Page
 #    When Admin clicks A New Program button
 #    Then Admin should see a popup open for Program details with empty form along with <SAVE> and <CANCEL> button and Close(X) Icon on the top right corner of the window
-
+#
 #  Scenario: Validate input fields and their text boxes in Program details form
 #    Given Admin is on Manage Program Page
 #    When Admin clicks A New Program button
@@ -47,11 +47,11 @@ Feature: Add New Program
 #    Given Admin is on Program Details Popup window
 #    When Admin clicks Cancel/Close(X) Icon on Program Details form
 #    Then Program Details popup window should be closed without saving
-#
-#  Scenario: Validate Save button on Program Details form
-#    Given Admin is on Program Details Popup window
-#    When Enter all the required fields with valid values and click Save button
-#    Then Admin gets a message "Successful Program Created" alert and able to see the new program added in the data table
+
+  Scenario: Validate Save button on Program Details form
+    Given Admin is on Program Details Popup window
+    When Enter all the required fields with valid values and click Save button
+    Then Admin gets a message Successful Program Created alert and able to see the new program added in the data table
 #
 #  Scenario: Validate Cancel button on Program Details form
 #    Given Admin is on Program Details Popup window
