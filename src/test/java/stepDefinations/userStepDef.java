@@ -25,13 +25,17 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import utility.TestBase;
 import utility.TestSetupManager;
+import utility.reusableMethods;
 
 public class userStepDef extends E_UserPOM{
 	   PageObject.A_LoginPOM A_LoginPOM=new PageObject.A_LoginPOM(driver);
+	   WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(60));
 	   String validdata;
 	   String invaliddata;
 	   //String filePath = ;
 		String sheetName = "User";
+		reusableMethods reusableMethods=new reusableMethods(driver);
+
 
 	 public userStepDef() {
 	        this.driver = driver;
@@ -65,11 +69,11 @@ public class userStepDef extends E_UserPOM{
 	}
 
 	@Then("Admin should see the {string} in the URL")
-	public void admin_should_see_the_in_the_url(String expected) {
+	public void admin_should_see_the_in_the_url(String expected) throws Exception {
 		
 		
 		Assert.assertTrue(driver.getCurrentUrl().contains(expected));
-	   
+		reusableMethods.getScreenshot("ManageUser");
 	}
 	
 	@Then("Admin should see a heading with text {string} on the page")
@@ -177,9 +181,12 @@ public class userStepDef extends E_UserPOM{
 	
 	@Given("Admin is on dashboard page after Login and clicks User on the navigation bar")
 	public void admin_is_on_dashboard_page_after_login_and_clicks_user_on_the_navigation_bar() {
-//		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(40));
-//		wait.until(ExpectedConditions.(ProgramModule));
+		
+    	wait.until(ExpectedConditions.elementToBeClickable(ProgramModule));
+		//reusableMethods.explicitWait(ProgramModule);
 		ProgramModule.click();
+		//reusableMethods.explicitWait(usermodule);
+		wait.until(ExpectedConditions.elementToBeClickable(usermodule));
 		userModuleClick();
 	}
 
@@ -189,8 +196,19 @@ public class userStepDef extends E_UserPOM{
 	}
 
 	@When("Admin clicks {string} button")
-	public void admin_clicks_button(String string) throws InterruptedException {
-		clickAddNewUser();
+	public void admin_clicks_button(String string) {
+		System.out.println("value: " +string);
+		if(string.equals("+ Add New User")) {
+			clickAddNewUser();
+		}
+		else if (string.equals("Assign Student")) {
+			wait.until(ExpectedConditions.elementToBeClickable(UserAssignStudent));
+			UserAssignStudent.click();
+		}
+		else if (string.equals("Assign Staff")) {
+			wait.until(ExpectedConditions.elementToBeClickable(UserAssignStaff));
+			UserAssignStaff.click();
+		}
 	}
 
 	@Then("Admin should see pop up open for user details with First Name,Middle name, Last Name, Location, phone, email, linkedin url, User Role, Role status, visa status,Undergraduate, postgraduate,time zone ,user comments and user fields along with Cancel , Submit and close buttons")
@@ -244,21 +262,21 @@ public class userStepDef extends E_UserPOM{
 	}
 	
 	@Given("Admin is on  User details pop up")
-	public void admin_is_on_user_details_pop_up() throws InterruptedException {
+	public void admin_is_on_user_details_pop_up() {
 		
 		clickAddNewUser();
 	
 	}
 	
 	@When("Admin enters userdata in  fields in the create user form and clicks on submit button by rading from excel with {int}")
-	public void admin_enters_userdata_in_fields_in_the_create_user_form_and_clicks_on_submit_button_by_rading_from_excel_with(Integer rownum) throws InterruptedException {
+	public void admin_enters_userdata_in_fields_in_the_create_user_form_and_clicks_on_submit_button_by_rading_from_excel_with(Integer rownum)  {
 		
 		UserCreateData(sheetName,rownum);
 		
 		
 	}
 	@Then("Admin gets {string}")
-	public void admin_gets(String string) throws InterruptedException {
+	public void admin_gets(String string) {
 		userCreationMsgValidation();
 		
 		Assert.assertTrue(ActualMsg.contains(string));
@@ -274,13 +292,13 @@ public class userStepDef extends E_UserPOM{
 	}
 
 	@Then("Admin should see error message below the test field and the field will be highlighed in red color")
-	public void admin_should_see_error_message_below_the_test_field_and_the_field_will_be_highlighed_in_red_color() throws InterruptedException {
+	public void admin_should_see_error_message_below_the_test_field_and_the_field_will_be_highlighed_in_red_color()  {
 		createUserMandatoryMsgValidation() ;
 		
 	}
 	
 	@When("Admin clicks on submit button without entering data")
-	public void admin_clicks_on_submit_button_without_entering_data() throws InterruptedException {
+	public void admin_clicks_on_submit_button_without_entering_data()  {
 		
 		//scrollDown();
 		
@@ -314,7 +332,7 @@ public class userStepDef extends E_UserPOM{
 	}
 	
 	@When("Admin enters invalid data in all of the fields in the form and clicks on submit button by reading from excel with {int}")
-	public void admin_enters_invalid_data_in_all_of_the_fields_in_the_form_and_clicks_on_submit_button_by_reading_from_excel_with(Integer rownum) {
+	public void admin_enters_invalid_data_in_all_of_the_fields_in_the_form_and_clicks_on_submit_button_by_reading_from_excel_with(Integer rownum) throws Exception {
 		UserCreateData(sheetName,rownum);
 	}
 
@@ -324,7 +342,7 @@ public class userStepDef extends E_UserPOM{
 	}
 
 	@Then("The newly added user should be present in the data table in Manage User page")
-	public void the_newly_added_user_should_be_present_in_the_data_table_in_manage_user_page() throws InterruptedException {
+	public void the_newly_added_user_should_be_present_in_the_data_table_in_manage_user_page() throws InterruptedException  {
 		userCreationMsgValidation();
 		UserSearch(SearchDataForCreatedUser);
 		Thread.sleep(1000);
@@ -346,16 +364,390 @@ public class userStepDef extends E_UserPOM{
 	@Then("A new pop up with User details appears")
 	public void a_new_pop_up_with_user_details_appears() {
 		Assert.assertEquals(UserDetailsHeader.getText(), "User Details");
+		userDetailsClose();
 	    
 	}
 	
 	@When("Update the fields with valid data and click submit by reading from excel with {int}")
-	public void update_the_fields_with_valid_data_and_click_submit_by_reading_from_excel_with(Integer int1) {
-	    
+	public void update_the_fields_with_valid_data_and_click_submit_by_reading_from_excel_with(Integer rownum) {
+		UserSearch("sreevidya");
+		userModuleEditClick();
+		UserEditData(sheetName,rownum);
 	}
 
 	@Then("Admin gets message {string} and see the updated values in data table")
-	public void admin_gets_message_and_see_the_updated_values_in_data_table(String string) {
+	public void admin_gets_message_and_see_the_updated_values_in_data_table(String expected) throws InterruptedException {
+            userCreationMsgValidation();
+		
+		Assert.assertTrue(ActualMsg.contains(expected));
+
+		UserSearch(SearchDataForCreatedUser);
+		Thread.sleep(1000);
+		ValidateDataTableData();
+		
+		ValidateDataTableDataForCreatedUser();
 	    
 	}
+	@When("Update the fields with invalid values and click submit by reading from excel with {int}")
+	public void update_the_fields_with_invalid_values_and_click_submit_by_reading_from_excel_with(Integer rownum) {
+		UserSearch("sreevidya");
+		userModuleEditClick();
+		UserEditData(sheetName,rownum);
+	}
+	
+	@When("Update the mandatory fields with valid values and click submit by reading from excel with {int}")
+	public void update_the_mandatory_fields_with_valid_values_and_click_submit_by_reading_from_excel_with(Integer rownum) {
+		UserSearch("sreevidya");
+		userModuleEditClick();
+		UserEditDataMandatoryFeilds(sheetName,rownum);
+	}
+
+	@When("Update the optional fields with valid values and click submit by reading from excel with {int}")
+	public void update_the_optional_fields_with_valid_values_and_click_submit_by_reading_from_excel_with(Integer rownum) {
+		UserSearch("sreevidya");
+		userModuleEditClick();
+		UserEditDataOptionalFeilds(sheetName,rownum);
+	}
+
+	@When("Admin enters only numbers or special char in the text fields and click submit by reading from excel with {int}")
+	public void admin_enters_only_numbers_or_special_char_in_the_text_fields_and_click_submit_by_reading_from_excel_with(Integer rownum) {
+		UserSearch("sreevidya");
+		userModuleEditClick();
+		UserEditData(sheetName,rownum);
+	}
+	@When("Admin clicks Cancel button on edit popup")
+	public void admin_clicks_cancel_button_on_edit_popup() {
+	    userDetailsCancel();
+	}
+
+	@Then("Admin can see the User details popup disappears and can see nothing changed for particular User")
+	public void admin_can_see_the_user_details_popup_disappears_and_can_see_nothing_changed_for_particular_user()  {
+		Assert.assertEquals(manageuserheader.getText(), "Manage User");
+		userCreationMsgValidation();
+		Assert.assertTrue(ActualMsg.isEmpty());
+	}
+
+	/*########Assign student######### */
+	
+	@Then("Admin should see a pop up open for assign student")
+	public void admin_should_see_a_pop_up_open_for_assign_student() throws IOException {
+	
+		String expected= "Assign Student";
+		
+		Assert.assertEquals(assignStudentTittle.getText(), expected);
+		
+		wait.until(ExpectedConditions.elementToBeClickable(save));		
+		Assert.assertTrue(getSave());
+		Assert.assertTrue(getCancel());
+		Assert.assertTrue(getClose());
+		userDetailsClose();
+		
+		
+		
+	}
+	
+	@Then("Admin should see User Role as R03,and other fields Student Email id,Program Name,Batch Name and Status with respective input boxes.")
+	public void admin_should_see_user_role_as_r03_and_other_fields_student_email_id_program_name_batch_name_and_status_with_respective_input_boxes() {
+    wait.until(ExpectedConditions.visibilityOf(AssignStudentRoleId));	
+	Assert.assertEquals(AssignStudentRoleId.isDisplayed(), true);
+	wait.until(ExpectedConditions.elementToBeClickable(AssignStudentEmailId));
+	Assert.assertEquals(AssignStudentEmailId.isDisplayed(), true);
+	Assert.assertEquals(AssignStudentProgramName.isDisplayed(), true);
+	wait.until(ExpectedConditions.visibilityOf(AssignStudentBatchName));
+	Assert.assertEquals(AssignStudentBatchName.isDisplayed(), true);
+	wait.until(ExpectedConditions.visibilityOf(AssignStudentActiveRadioButton));
+	Assert.assertEquals(AssignStudentActiveRadioButton.isDisplayed(), true);
+	Assert.assertEquals(AssignStudentInActiveRadioButton.isDisplayed(), true);
+	userDetailsClose();
+		
+}
+	@Then("Admin should see drop down boxes with valid datas for Student Email id,Program Name and Batch Name")
+	public void admin_should_see_drop_down_boxes_with_valid_datas_for_student_email_id_program_name_and_batch_name() throws InterruptedException {
+//		userDetailsClose();
+//		wait.until(ExpectedConditions.elementToBeClickable(UserAssignStudent));
+//		UserAssignStudent.click();
+//		validateEmailDropDown();
+		Assert.assertEquals(AssignStudentEmailId.findElement(By.xpath("div/span")).getText(), "Select Email ID");
+		Assert.assertEquals(AssignStudentProgramName.findElement(By.xpath("../label")).getText(), "Program Name");
+		Assert.assertEquals(AssignStudentBatchName.findElement(By.xpath("../label")).getText(), "Batch Name");
+		userDetailsClose();
+	}
+	@Then("Admin should see two radio button for Status")
+	public void admin_should_see_two_radio_button_for_status() {
+		int radio=radiobutton.size();
+		
+		Assert.assertEquals(radio,2 );
+		userDetailsClose();
+	}
+	@Given("Admin is in Assign Student details pop up page")
+	public void admin_is_in_assign_student_details_pop_up_page() {
+		wait.until(ExpectedConditions.elementToBeClickable(UserAssignStudent));
+		UserAssignStudent.click();
+	}
+
+	@When("Admin clicks {string} button with entering any data")
+	public void admin_clicks_button_with_entering_any_data(String string) {
+		wait.until(ExpectedConditions.elementToBeClickable(save));
+		save.click();
+	}
+
+	@Then("Admin gets a Error message alert")
+	public void admin_gets_a_error_message_alert() {
+		Assert.assertEquals(AssignStudentEmailMandatoryError.isDisplayed(),true);
+		Assert.assertEquals(AssignStudentProgramMandatoryError.isDisplayed(),true);
+		Assert.assertEquals(AssignStudentBatchMandatoryError.isDisplayed(),true);
+		Assert.assertEquals(AssignStudentStatusMandatoryError.isDisplayed(),true);
+		userDetailsClose();
+	    
+	}
+
+	@When("Admin clicks {string} button without entering Student Email id")
+	public void admin_clicks_button_without_entering_student_email_id(String string) {
+		AssignStudentActiveRadioButton.click();
+		//wait.until(ExpectedConditions.elementToBeClickable(save));
+		save.click();
+	}
+
+	@Then("Admin gets a Error message alert as {string}")
+	public void admin_gets_a_error_message_alert_as(String string) throws InterruptedException {
+		if(string.equals("Student Email id is required.")) {
+            String Actualtext=AssignStaffEmailMandatoryError.getText();
+            
+			userDetailsClose();
+			System.out.println("actual text: "+Actualtext);
+		     Assert.assertEquals(Actualtext,string);
+		
+		}
+		
+		else if (string.equals("Program Name is required.")) {
+			String Actualtext=AssignStudentProgramMandatoryError.getText();
+			userDetailsClose();
+			System.out.println("actual text: "+Actualtext);
+			Assert.assertEquals(Actualtext,string);
+			
+			
+		}
+       else if (string.equals("Batch Name is required.")) {
+    	   String Actualtext=AssignStudentBatchMandatoryError.getText();
+			userDetailsClose();
+			System.out.println("actual text: "+Actualtext);
+			Assert.assertEquals(Actualtext,string);
+    	  
+		}
+       else if (string.equals("Status is required.")) {
+    	   String Actualtext=AssignStudentStatusMandatoryError.getText();
+			userDetailsClose();
+			System.out.println("actual text: "+Actualtext);
+			Assert.assertEquals(Actualtext,string);
+    	   
+		}
+			
+		
+	}
+
+	@When("Admin clicks {string} button without selecting program")
+	public void admin_clicks_button_without_selecting_program(String string) {
+		wait.until(ExpectedConditions.visibilityOf(save));	
+		userDetailsClose();
+		wait.until(ExpectedConditions.elementToBeClickable(UserAssignStudent));
+		 UserAssignStudent.click();
+		AddEmailIdInDropDown();
+		AssignStudentActiveRadioButton.click();
+		wait.until(ExpectedConditions.elementToBeClickable(save));
+		save.click();
+	}
+
+	@When("Admin clicks {string} button without selecting batch")
+	public void admin_clicks_button_without_selecting_batch(String string) {
+		wait.until(ExpectedConditions.visibilityOf(save));	
+		userDetailsClose();
+		wait.until(ExpectedConditions.elementToBeClickable(UserAssignStudent));
+		 UserAssignStudent.click();
+		AddEmailIdInDropDown();
+		AssignStudentActiveRadioButton.click();
+		wait.until(ExpectedConditions.elementToBeClickable(save));
+		save.click();
+	}
+	@When("Admin clicks {string} button without giving status")
+	public void admin_clicks_button_without_giving_status(String string) {
+		wait.until(ExpectedConditions.visibilityOf(save));	
+		userDetailsClose();
+		wait.until(ExpectedConditions.elementToBeClickable(UserAssignStudent));
+		 UserAssignStudent.click();
+		AddEmailIdInDropDown();
+		save.click();
+	    
+	}
+	
+	@Then("Assign Student popup window should be closed without saving")
+	public void assign_student_popup_window_should_be_closed_without_saving() {
+		Assert.assertEquals(manageuserheader.getText(), "Manage User");
+	}
+
+	@When("Enter all the required fields with valid values and click Save button")
+	public void enter_all_the_required_fields_with_valid_values_and_click_save_button() {
+		wait.until(ExpectedConditions.visibilityOf(save));	
+		userDetailsClose();
+		wait.until(ExpectedConditions.elementToBeClickable(UserAssignStudent));
+		 UserAssignStudent.click();
+		 AddEmailIdInDropDown();
+		 AddProgramNameInDropDown();
+		 AddBatchNameInDropDown();
+		 AssignStudentActiveRadioButton.click();
+		 save.click();
+	}
+
+	@Then("Admin gets a message {string} alert")
+	public void admin_gets_a_message_alert(String string) {
+		userCreationMsgValidation();
+		Assert.assertTrue(ActualMsg.contains(string));
+	}
+
+	
+
+	@Then("Admin can see the Assign Student popup disappears without assigning")
+	public void admin_can_see_the_assign_student_popup_disappears_without_assigning() {
+		Assert.assertEquals(manageuserheader.getText(), "Manage User");
+	}
+	
+
+@Then("Admin should see a pop up open for assign staff details with empty form along with Save and Cancel button and close \\(X) icon on the top right corner of the window")
+public void admin_should_see_a_pop_up_open_for_assign_staff_details_with_empty_form_along_with_save_and_cancel_button_and_close_x_icon_on_the_top_right_corner_of_the_window() {
+	String expected= "Assign Staff";
+	String actual=assignStaffTittle.getText();
+	
+	
+	wait.until(ExpectedConditions.elementToBeClickable(save));		
+	Assert.assertTrue(getSave());
+	Assert.assertTrue(getCancel());
+	Assert.assertTrue(getClose());
+	userDetailsClose();
+	Assert.assertEquals(actual, expected);
+}
+
+@Then("Admin should see User Role as R02,and other fields Student Email id,Skill,Program Name,Batch Name and Status with respective input boxes.")
+public void admin_should_see_user_role_as_r02_and_other_fields_student_email_id_skill_program_name_batch_name_and_status_with_respective_input_boxes() {
+	Assert.assertEquals(AssignStudentRoleId.isDisplayed(), true);
+	Assert.assertEquals(AssignStaffEmailId.isDisplayed(), true);
+	Assert.assertEquals(AssignStaffSkill.isDisplayed(), true);
+	Assert.assertEquals(AssignStaffProgramName.isDisplayed(), true);
+	Assert.assertEquals(AssignStaffBatchName.isDisplayed(), true);
+	
+	Assert.assertEquals(AssignStudentActiveRadioButton.isDisplayed(), true);
+	Assert.assertEquals(AssignStudentInActiveRadioButton.isDisplayed(), true);
+	userDetailsClose();
+}
+
+@Then("Admin should see drop down boxes with valid datas for Staff Email id,Program Name and Batch Name")
+public void admin_should_see_drop_down_boxes_with_valid_datas_for_staff_email_id_program_name_and_batch_name() {
+	Assert.assertEquals(AssignStaffEmailId.findElement(By.xpath("div/span")).getText(), "Select Email Id");
+	Assert.assertEquals(AssignStaffProgramName.findElement(By.xpath("../p-dropdown/div/span")).getText(), "Select a Program name");
+	Assert.assertEquals(AssignStaffBatchName.getText(), "Batch Name");
+	userDetailsClose();
+}
+
+@Then("Admin gets a Error message alert for Staff")
+public void admin_gets_a_error_message_alert_for_staff() {
+	Assert.assertEquals(AssignStaffEmailMandatoryError.isDisplayed(),true);
+	Assert.assertEquals(AssignStudentProgramMandatoryError.isDisplayed(),true);
+	Assert.assertEquals(AssignStudentBatchMandatoryError.isDisplayed(),true);
+	Assert.assertEquals(AssignStudentStatusMandatoryError.isDisplayed(),true);
+	userDetailsClose();
+}
+@Given("Admin is in Assign Staff details pop up page")
+public void admin_is_in_assign_staff_details_pop_up_page() {
+	wait.until(ExpectedConditions.elementToBeClickable(UserAssignStaff));
+	UserAssignStaff.click();
+}
+
+@When("Admin clicks {string} button without entering Student Email id for Staff")
+public void admin_clicks_button_without_entering_student_email_id_for_staff(String string) {
+	AssignStaffSkill.findElement(By.xpath("../input")).sendKeys("UI Hackathon");
+	//staffAddProgramNameInDropDown();
+	//staffAddBatchNameInDropDown();
+	AssignStudentActiveRadioButton.click();
+	save.click();
+}
+
+@Then("Admin gets a Error message alert as {string} for Staff")
+public void admin_gets_a_error_message_alert_as_for_staff(String string) {
+	System.out.println("expected text: "+string);
+	if(string.equals("Staff Email id is required.")) {
+        String Actualtext=AssignStaffEmailMandatoryError.getText();
+        
+		userDetailsClose();
+		System.out.println("actual text: "+Actualtext);
+	     Assert.assertEquals(Actualtext,string);
+	
+	}
+	else if (string.equals("Skill is required")) {
+		userDetailsClose();
+		log.error("Skill is not a manadtory feild as per UI");
+		
+		
+	}
+	else if (string.equals("Program Name is required.")) {
+		String Actualtext=AssignStudentProgramMandatoryError.getText();
+		userDetailsClose();
+		log.info("actual text: "+Actualtext);
+		Assert.assertEquals(Actualtext,string);
+		
+		
+	}
+   else if (string.equals("Batch Name is required.")) {
+	   String Actualtext=AssignStudentBatchMandatoryError.getText();
+		userDetailsClose();
+		System.out.println("actual text: "+Actualtext);
+		Assert.assertEquals(Actualtext,string);
+	  
+	}
+   else if (string.equals("SStatus is required.")) {
+	   String Actualtext=AssignStudentStatusMandatoryError.getText();
+		userDetailsClose();
+		System.out.println("actual text: "+Actualtext);
+		Assert.assertEquals(Actualtext,string);
+	   
+	}
+}
+
+@When("Admin clicks {string} button without entering Skill for Staff")
+public void admin_clicks_button_without_entering_skill_for_staff(String string) {
+	
+	staffAddEmailInDropDown();
+	//AddProgramNameInDropDown();
+	//staffAddBatchNameInDropDown();
+	AssignStudentActiveRadioButton.click();
+	save.click();
+}
+
+@When("Admin clicks {string} button without selecting program for Staff")
+public void admin_clicks_button_without_selecting_program_for_staff(String string) {
+	staffAddEmailInDropDown();
+	AssignStaffSkill.findElement(By.xpath("../input")).sendKeys("UI Hackathon");
+	//staffAddBatchNameInDropDown();
+	AssignStudentActiveRadioButton.click();
+	save.click();
+}
+
+@When("Admin clicks {string} button without selecting batch for Staff")
+public void admin_clicks_button_without_selecting_batch_for_staff(String string) {
+	
+	AssignStaffSkill.findElement(By.xpath("../input")).sendKeys("UI Hackathon");
+	staffAddEmailInDropDown();
+	AddProgramNameInDropDown();
+	AssignStudentActiveRadioButton.click();
+	save.click();
+}
+
+@When("Admin clicks {string} button without giving status for Staff")
+public void admin_clicks_button_without_giving_status_for_staff(String string) {
+	AssignStaffSkill.findElement(By.xpath("../input")).sendKeys("UI Hackathon");
+	staffAddEmailInDropDown();
+	//AddProgramNameInDropDown();
+	//staffAddBatchNameInDropDown();
+	save.click();
+	
+}
+
+
 }

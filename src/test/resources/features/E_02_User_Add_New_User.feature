@@ -31,6 +31,17 @@ Scenario Outline: Check if user is created when only mandatory fields are entere
 						|11|User Added Successfully|
 						|12|User Added Successfully|
 						|13|User Added Successfully|
+						|28|User Added Successfully|
+						|29|User Added Successfully|
+						|30|User Added Successfully|
+						|31|User Added Successfully|
+						|32|User Added Successfully|
+						|33|User Added Successfully|
+						|34|User Added Successfully|
+						|35|User Added Successfully|
+						|36|User Added Successfully|
+						
+						
 						
 Scenario Outline: check if user is created when invalid data is entered in all of the fields
     Given Admin is on  User details pop up

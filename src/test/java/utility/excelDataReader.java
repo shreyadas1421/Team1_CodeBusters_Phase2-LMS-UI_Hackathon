@@ -27,7 +27,7 @@ public  Map<String, String> getTestData(String sheetName, int rowNumber) {
 			
 				String colHeader = headerRow.getCell(i).getStringCellValue();
 				
-				String colValue = testRow.getCell(i) != null ? formatter.formatCellValue(testRow.getCell(i)):null;
+				String colValue = testRow.getCell(i) != null ? formatter.formatCellValue(testRow.getCell(i)): "";
 			
 				//String colValue = testRow.getCell(i) != null ? testRow.getCell(i).getStringCellValue():null;
 			
