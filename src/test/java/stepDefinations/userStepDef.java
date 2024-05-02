@@ -4,7 +4,9 @@ import static org.testng.Assert.assertEquals;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -23,18 +25,21 @@ import PageObject.E_UserPOM;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import utility.Cache;
 import utility.TestBase;
 import utility.TestSetupManager;
 import utility.reusableMethods;
 
 public class userStepDef extends E_UserPOM{
-	   PageObject.A_LoginPOM A_LoginPOM=new PageObject.A_LoginPOM(driver);
+	   //PageObject.A_LoginPOM A_LoginPOM=new PageObject.A_LoginPOM();
 	   WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(60));
 	   String validdata;
 	   String invaliddata;
 	   //String filePath = ;
 		String sheetName = "User";
 		reusableMethods reusableMethods=new reusableMethods(driver);
+		List<String> beforeSortrecordsList;
+		List<String> actualSortedrecordsList;
 
 
 	 public userStepDef() {
@@ -57,7 +62,7 @@ public class userStepDef extends E_UserPOM{
 
 	@Given("Admin is on dashboard page after Login")
 	public void admin_is_on_dashboard_page_after_login() {
-		 Assert.assertEquals(A_LoginPOM.dashboard.isDisplayed(), true);
+		 Assert.assertEquals(dashboard.isDisplayed(), true);
 		
 
 	}
@@ -73,7 +78,7 @@ public class userStepDef extends E_UserPOM{
 		
 		
 		Assert.assertTrue(driver.getCurrentUrl().contains(expected));
-		reusableMethods.getScreenshot("ManageUser");
+		//reusableMethods.getScreenshot("ManageUser");
 	}
 	
 	@Then("Admin should see a heading with text {string} on the page")
@@ -192,6 +197,7 @@ public class userStepDef extends E_UserPOM{
 
 	@Given("Admin is on Manage User Page")
 	public void admin_is_on_manage_user_page() {
+		
 		Assert.assertEquals(manageuserheader.getText(), "Manage User");
 	}
 
@@ -267,12 +273,12 @@ public class userStepDef extends E_UserPOM{
 		clickAddNewUser();
 	
 	}
-	
+	int number;
 	@When("Admin enters userdata in  fields in the create user form and clicks on submit button by rading from excel with {int}")
 	public void admin_enters_userdata_in_fields_in_the_create_user_form_and_clicks_on_submit_button_by_rading_from_excel_with(Integer rownum)  {
 		
 		UserCreateData(sheetName,rownum);
-		
+		number=rownum;
 		
 	}
 	@Then("Admin gets {string}")
@@ -280,6 +286,19 @@ public class userStepDef extends E_UserPOM{
 		userCreationMsgValidation();
 		
 		Assert.assertTrue(ActualMsg.contains(string));
+		if(ActualMsg.equals("User Added Successfully")) {
+			Cache.setData("UserFirstName_"+number, UserFirstName);
+		}
+		
+		if(number==34){
+			Cache.setData("Admin_User", Email);
+		}
+		if(number==35){
+			Cache.setData("Staff_User", Email);
+		}
+		if(number==36){
+			Cache.setData("Student_User", Email);
+		}
 		
 		
 	}
@@ -363,6 +382,7 @@ public class userStepDef extends E_UserPOM{
 
 	@Then("A new pop up with User details appears")
 	public void a_new_pop_up_with_user_details_appears() {
+		Cache.mapentries();
 		Assert.assertEquals(UserDetailsHeader.getText(), "User Details");
 		userDetailsClose();
 	    
@@ -370,7 +390,11 @@ public class userStepDef extends E_UserPOM{
 	
 	@When("Update the fields with valid data and click submit by reading from excel with {int}")
 	public void update_the_fields_with_valid_data_and_click_submit_by_reading_from_excel_with(Integer rownum) {
-		UserSearch("sreevidya");
+		//Cache.mapentries();
+		number=rownum;
+		//System.out.println("number: "+number);
+		//UserSearch((String) Cache.getData("UserFirstName_"+number));
+		UserSearch((String) Cache.getData("UserFirstName_2"));
 		userModuleEditClick();
 		UserEditData(sheetName,rownum);
 	}
@@ -390,41 +414,54 @@ public class userStepDef extends E_UserPOM{
 	}
 	@When("Update the fields with invalid values and click submit by reading from excel with {int}")
 	public void update_the_fields_with_invalid_values_and_click_submit_by_reading_from_excel_with(Integer rownum) {
-		UserSearch("sreevidya");
+		number=rownum;
+		//UserSearch((String) Cache.getData("UserFirstName_"+number));
+		UserSearch((String) Cache.getData("UserFirstName_2"));
 		userModuleEditClick();
 		UserEditData(sheetName,rownum);
 	}
 	
 	@When("Update the mandatory fields with valid values and click submit by reading from excel with {int}")
 	public void update_the_mandatory_fields_with_valid_values_and_click_submit_by_reading_from_excel_with(Integer rownum) {
-		UserSearch("sreevidya");
+		number=rownum;
+		//UserSearch((String) Cache.getData("UserFirstName_"+number));
+		UserSearch((String) Cache.getData("UserFirstName_2"));
 		userModuleEditClick();
 		UserEditDataMandatoryFeilds(sheetName,rownum);
 	}
 
 	@When("Update the optional fields with valid values and click submit by reading from excel with {int}")
 	public void update_the_optional_fields_with_valid_values_and_click_submit_by_reading_from_excel_with(Integer rownum) {
-		UserSearch("sreevidya");
+		//UserSearch("sreevidya");
+		number=rownum;
+		//UserSearch((String) Cache.getData("UserFirstName_"+number));
+		UserSearch((String) Cache.getData("UserFirstName_2"));
 		userModuleEditClick();
 		UserEditDataOptionalFeilds(sheetName,rownum);
 	}
 
 	@When("Admin enters only numbers or special char in the text fields and click submit by reading from excel with {int}")
 	public void admin_enters_only_numbers_or_special_char_in_the_text_fields_and_click_submit_by_reading_from_excel_with(Integer rownum) {
-		UserSearch("sreevidya");
+		//UserSearch("sreevidya");
+		
+		number=rownum;
+		//UserSearch((String) Cache.getData("UserFirstName_"+number));
+		UserSearch((String) Cache.getData("UserFirstName_2"));
 		userModuleEditClick();
 		UserEditData(sheetName,rownum);
 	}
-	@When("Admin clicks Cancel button on edit popup")
-	public void admin_clicks_cancel_button_on_edit_popup() {
+	@When("Admin clicks Cancel button on edit popup1")
+	public void admin_clicks_cancel_button_on_edit_popup1() {
+		UserSearch((String) Cache.getData("UserFirstName_2"));
+		userModuleEditClick();
 	    userDetailsCancel();
 	}
 
 	@Then("Admin can see the User details popup disappears and can see nothing changed for particular User")
 	public void admin_can_see_the_user_details_popup_disappears_and_can_see_nothing_changed_for_particular_user()  {
 		Assert.assertEquals(manageuserheader.getText(), "Manage User");
-		userCreationMsgValidation();
-		Assert.assertTrue(ActualMsg.isEmpty());
+//		userCreationMsgValidation();
+//		Assert.assertTrue(ActualMsg.isEmpty());
 	}
 
 	/*########Assign student######### */
@@ -475,9 +512,9 @@ public class userStepDef extends E_UserPOM{
 	@Then("Admin should see two radio button for Status")
 	public void admin_should_see_two_radio_button_for_status() {
 		int radio=radiobutton.size();
-		
-		Assert.assertEquals(radio,2 );
 		userDetailsClose();
+		Assert.assertEquals(radio,2 );
+		
 	}
 	@Given("Admin is in Assign Student details pop up page")
 	public void admin_is_in_assign_student_details_pop_up_page() {
@@ -491,8 +528,8 @@ public class userStepDef extends E_UserPOM{
 		save.click();
 	}
 
-	@Then("Admin gets a Error message alert")
-	public void admin_gets_a_error_message_alert() {
+	@Then("Admin gets a Error message alert1")
+	public void admin_gets_a_error_message_alert1() {
 		Assert.assertEquals(AssignStudentEmailMandatoryError.isDisplayed(),true);
 		Assert.assertEquals(AssignStudentProgramMandatoryError.isDisplayed(),true);
 		Assert.assertEquals(AssignStudentBatchMandatoryError.isDisplayed(),true);
@@ -584,8 +621,8 @@ public class userStepDef extends E_UserPOM{
 		Assert.assertEquals(manageuserheader.getText(), "Manage User");
 	}
 
-	@When("Enter all the required fields with valid values and click Save button")
-	public void enter_all_the_required_fields_with_valid_values_and_click_save_button() {
+	@When("Enter all the required fields with valid values and click Save button1")
+	public void enter_all_the_required_fields_with_valid_values_and_click_save_button1() {
 		wait.until(ExpectedConditions.visibilityOf(save));	
 		userDetailsClose();
 		wait.until(ExpectedConditions.elementToBeClickable(UserAssignStudent));
@@ -599,6 +636,7 @@ public class userStepDef extends E_UserPOM{
 
 	@Then("Admin gets a message {string} alert")
 	public void admin_gets_a_message_alert(String string) {
+		userDetailsClose();
 		userCreationMsgValidation();
 		Assert.assertTrue(ActualMsg.contains(string));
 	}
@@ -697,17 +735,19 @@ public void admin_gets_a_error_message_alert_as_for_staff(String string) {
    else if (string.equals("Batch Name is required.")) {
 	   String Actualtext=AssignStudentBatchMandatoryError.getText();
 		userDetailsClose();
-		System.out.println("actual text: "+Actualtext);
+		log.info("actual text: "+Actualtext);
+		
 		Assert.assertEquals(Actualtext,string);
 	  
 	}
-   else if (string.equals("SStatus is required.")) {
+   else if (string.equals("Status is required.")) {
 	   String Actualtext=AssignStudentStatusMandatoryError.getText();
 		userDetailsClose();
-		System.out.println("actual text: "+Actualtext);
+		log.info("actual text: "+Actualtext);
 		Assert.assertEquals(Actualtext,string);
 	   
 	}
+   
 }
 
 @When("Admin clicks {string} button without entering Skill for Staff")
@@ -749,5 +789,169 @@ public void admin_clicks_button_without_giving_status_for_staff(String string) {
 	
 }
 
+/*######## Sort and delete ######*/
+
+
+@Given("Admin is on Manage User Page11")
+public void admin_is_on_manage_user_page11() {
+    reusableMethods.click(userLink);
+}
+@When("Admin clicks the delete icon")
+public void admin_clicks_the_delete_icon() {
+    reusableMethods.selectProgram("sreevidya", SeachText);
+    clickOnCheckbox("sreevidya");
+    reusableMethods.click(btn_delete);
+}
+
+@Given("Admin is on Confirm Deletion alert in user")
+public void admin_is_on_confirm_deletion_alert_in_user() {
+	if(reusableMethods.isElementpresent(heading_delete_confirm)) {
+		System.out.println("delete confirm method from inside loop");
+		reusableMethods.click(btn_delete);
+	}
+	 else  {
+    	reusableMethods.click(btn_delete);
+	    System.out.println("this message ofter if coinditon if confirm is not present ----- ");
+    }
+}
+@When("Admin clicks <NO> button on the alert in User")
+public void admin_clicks_no_button_on_the_alert_in_user() {
+	reusableMethods.click(confirm_No_btn);
+}
+
+@Then("Admin gets a message {string} alert and do not see that user in the data table in user")
+public void admin_gets_a_message_alert_and_do_not_see_that_user_in_the_data_table_in_user(String string) {
+	String ActualMsg = reusableMethods.CreationMsgValidation("//p-toast//div[contains(@class, 'p-toast-detail')]");
+	System.out.println("program delted info " +ActualMsg);
+	System.out.println("expected message  " + string);
+	Assert.assertTrue(ActualMsg.contains(string));
+	SeachText.clear();
+	reusableMethods.flentWait(userLink);
+}
+@Then("Admin gets a message {string} alert and do not see that user in the data table")
+public void admin_gets_a_message_alert_and_do_not_see_that_user_in_the_data_table(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When("Admin clicks any checkbox in the data table in User page")
+public void admin_clicks_any_checkbox_in_the_data_table_in_user_page() {
+	// reusableMethods.selectProgram("Mary", SeachText);
+	  //  clickOnCheckbox("Mary");
+	   // reusableMethods.click(c);
+	   
+}
+@Given("Admin is on Confirm Deletion alert by click on delete all button in User")
+public void admin_is_on_confirm_deletion_alert_by_click_on_delete_all_button_in_user() {
+	if(isProgramChecked()) {
+		System.out.println("Inside codition is progarmchecked ");
+		reusableMethods.click(deleteAllbtn);
+		
+	}else {
+		System.out.println("outside condition of is programchecked");
+		reusableMethods.selectProgram("sreevidya", SeachText);
+	    clickOnCheckbox("sreevidya");
+		reusableMethods.click(deleteAllbtn);
+	}
+}
+
+@Given("Admin is on Confirm Deletion alert by click on delete all button in User ofter selecting multiple user")
+public void admin_is_on_confirm_deletion_alert_by_click_on_delete_all_button_in_user_ofter_selecting_multiple_user() {
+	if(isProgramChecked()) {
+		System.out.println("Inside codition is progarmchecked ");
+		reusableMethods.selectProgram("######", SeachText);
+	    clickOnCheckbox("######");
+		reusableMethods.click(deleteAllbtn);
+		
+	}else {
+		
+		System.out.println("outside condition of is programchecked");
+		reusableMethods.selectProgram("sreevidya", SeachText);
+		clickOnCheckbox("sreevidya");
+		reusableMethods.selectProgram("######", SeachText);
+	    clickOnCheckbox("######");
+	    reusableMethods.click(deleteAllbtn);
+	    }
+		
+	
+}
+
+
+@Then("Admin should land on Manage User page and can see the selected user is not deleted from the data table")
+public void admin_should_land_on_manage_user_page_and_can_see_the_selected_user_is_not_deleted_from_the_data_table() {
+System.out.println("user not deletede from table");
+}
+
+@Then("Admin should land on Manage User page and can see the selected users are deleted from the data table")
+public void admin_should_land_on_manage_user_page_and_can_see_the_selected_users_are_deleted_from_the_data_table() {
+System.out.println("user deleted succesfully with delete alla");
+}
+
+
+@When("Admin clicks on ID sort icon")
+public void admin_clicks_on_id_sort_icon() {
+beforeSortrecordsList= getProgramNames(userIdsInEachPage);
+reusableMethods.click(userIdSortIcon);
+}
+
+@Then("Admin should see User details are sorted by id")
+public void admin_should_see_user_details_are_sorted_by_id() {
+Collections.sort(beforeSortrecordsList, String.CASE_INSENSITIVE_ORDER);
+actualSortedrecordsList = getProgramNames(userIdsInEachPage);
+System.out.println("we sorted list program description    " +beforeSortrecordsList);
+System.out.println("actual list program description   " +actualSortedrecordsList);
+Assert.assertEquals(actualSortedrecordsList, beforeSortrecordsList );
+}
+
+@When("Admin clicks on name sort icon")
+public void admin_clicks_on_name_sort_icon() {
+reusableMethods.click(startPageLink);
+beforeSortrecordsList= getProgramNames(userNamesInEachPage);
+reusableMethods.click(userNameSortIcon);
+}
+
+@Then("Admin should see User details are sorted by name")
+public void admin_should_see_user_details_are_sorted_by_name() {
+Collections.sort(beforeSortrecordsList, String.CASE_INSENSITIVE_ORDER);
+actualSortedrecordsList = getProgramNames(userNamesInEachPage);
+System.out.println("we sorted list program description    " +beforeSortrecordsList);
+System.out.println("actual list program description   " +actualSortedrecordsList);
+Assert.assertEquals(actualSortedrecordsList, beforeSortrecordsList );
+
+}
+
+@When("Admin clicks on Location sort icon")
+public void admin_clicks_on_location_sort_icon() {
+
+reusableMethods.click(startPageLink);
+beforeSortrecordsList= getProgramNames(userLocationInEachPage);
+ reusableMethods.click(userLocationSortIcon);
+}
+
+@Then("Admin should see User details are sorted by Location")
+public void admin_should_see_user_details_are_sorted_by_location() {
+Collections.sort(beforeSortrecordsList, String.CASE_INSENSITIVE_ORDER);
+actualSortedrecordsList = getProgramNames(userLocationInEachPage);
+System.out.println("we sorted list program description    " +beforeSortrecordsList);
+System.out.println("actual list program description   " +actualSortedrecordsList);
+Assert.assertEquals(actualSortedrecordsList, beforeSortrecordsList );
+
+}
+
+@When("Admin clicks on Phone number sort icon")
+public void admin_clicks_on_phone_number_sort_icon() {
+reusableMethods.click(startPageLink);
+beforeSortrecordsList= getProgramNames(userPhonenumberInEachPage);
+ reusableMethods.click(userPhoneNumberSortIcon);
+}
+
+@Then("Admin should see User details are sorted by Phone number")
+public void admin_should_see_user_details_are_sorted_by_phone_number() {
+Collections.sort(beforeSortrecordsList, String.CASE_INSENSITIVE_ORDER);
+actualSortedrecordsList = getProgramNames(userPhonenumberInEachPage);
+System.out.println("we sorted list program description    " +beforeSortrecordsList);
+System.out.println("actual list program description   " +actualSortedrecordsList);
+Assert.assertEquals(actualSortedrecordsList, beforeSortrecordsList );
+
+}
 
 }

@@ -16,7 +16,7 @@ public  Map<String, String> getTestData(String sheetName, int rowNumber) {
 		Map<String, String> ioMap1 = new HashMap<>();
 		ioMap1.clear();
 		try {
-			XSSFWorkbook workbook = new XSSFWorkbook(excelDataReader.class.getResourceAsStream("/TestDataSelenium.xlsx"));
+			XSSFWorkbook workbook = new XSSFWorkbook(excelDataReader.class.getResourceAsStream("/TestData/TestDataSelenium.xlsx"));
 			XSSFSheet sheet = workbook.getSheet(sheetName);
 			XSSFRow headerRow = sheet.getRow(0);
 			XSSFRow testRow = sheet.getRow(rowNumber);

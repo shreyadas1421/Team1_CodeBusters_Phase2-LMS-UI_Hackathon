@@ -16,7 +16,9 @@ public class TestBase {
 
 	
 public static WebDriver driver;
+
 public static Logger log = LogManager.getLogger();
+
 	
 	public WebDriver WebDriverManager() throws IOException {
 		

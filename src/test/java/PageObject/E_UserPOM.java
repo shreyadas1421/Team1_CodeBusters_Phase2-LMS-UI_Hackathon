@@ -32,6 +32,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
+import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -41,6 +42,7 @@ import jdk.internal.org.jline.utils.Log;
 
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import utility.Cache;
 import utility.TestBase;
 import utility.excelDataReader;
 import utility.reusableMethods;
@@ -58,6 +60,8 @@ public class E_UserPOM extends TestBase {
 	@FindBy(xpath = "//span[text()='User']") public WebElement usermodule;
 	@FindBy(xpath = "//span[text()='Program']") public WebElement ProgramModule;
 	@FindBy(xpath = "//span[text()='Logout']") public WebElement logout;
+	@FindBy(xpath="//span[normalize-space()='LMS - Learning Management System']")
+	public WebElement dashboard;
 	@FindBy(xpath = "//div[text()=' Manage User']") public WebElement manageuserheader;
 	@FindBy(xpath = "//span[@class='p-paginator-current ng-star-inserted']") public WebElement UserPagination;
 	@FindBy(xpath = "//span[@class='p-paginator-icon pi pi-angle-double-left']") public WebElement UserPaginationdlefticon;
@@ -337,10 +341,12 @@ public class E_UserPOM extends TestBase {
 	}
 	
 	public String SearchDataForCreatedUser;
+	public String Email;
+	public String UserFirstName;
 	public void UserCreateData(String sheetname, int rownum)  {
 		datamap= new excelDataReader();
 		excelmap=datamap.getTestData(sheetname, rownum);
-		//SearchDataForCreatedUser=excelmap.get("FirstName");
+		UserFirstName=excelmap.get("FirstName");
 		UserDetailsFirstName.sendKeys(excelmap.get("FirstName"));
 		//UserDetailsMiddleName.sendKeys(excelmap.get("MiddleName"));
 		UserDetailsMiddleName.sendKeys(excelmap.get("MiddleName"));
@@ -377,14 +383,16 @@ public class E_UserPOM extends TestBase {
 		}
 		
 		String randomString = generateRandomString(6);
+		Email=randomString+"_"+excelmap.get("Email");
 		
-		UserDetailsEmail.sendKeys(randomString+"_"+excelmap.get("Email"));
+		UserDetailsEmail.sendKeys(Email);
 		
 		UserDetailsUserEduUg.sendKeys(excelmap.get("EduUg"));
 		UserDetailsUserEduPg.sendKeys(excelmap.get("EduPg"));
 		UserDetailsUserTimeZone.sendKeys(excelmap.get("TimeZone"));
 		scrollDown();
 		UserDetailsUserComments.sendKeys(excelmap.get("Comments"));
+		wait.until(ExpectedConditions.visibilityOf(UserDetailsUserCancel));
 		wait.until(ExpectedConditions.elementToBeClickable(UserDetailsUserSubmit));
 		UserDetailsUserSubmit.click();
 		
@@ -777,6 +785,7 @@ public class E_UserPOM extends TestBase {
 	
 	@FindBy(xpath="//input[@id='roleId']") public WebElement AssignStudentRoleId;
 	@FindBy(xpath="//p-dropdown[@placeholder='Select Email ID']") public WebElement AssignStudentEmailId;
+	@FindBy(xpath="//span[text()='Select Email ID']") public WebElement AssignStudentEmailId1;
 	@FindBy(xpath="//p-dropdown[@placeholder='Select Email Id']") public WebElement AssignStaffEmailId;
 	@FindBy(xpath="//input[@id='programName']") public WebElement AssignStudentProgramName;
 	@FindBy(xpath="//label[@for='programName']") public WebElement AssignStaffProgramName;
@@ -806,6 +815,7 @@ public class E_UserPOM extends TestBase {
 
 	@FindBy(xpath="//div[text()=' Email Id is required. ']") public WebElement AssignStaffEmailMandatoryError;
 	@FindBy(xpath="//p-dropdown[@id='programName']/div/div[2]/span") public WebElement AssignStaffProgramarrowdd;
+	@FindBy(xpath="//p-dropdown[@id='userId']/div/div[2]/span") public WebElement AssignStudentemailarrowdd;
 
 	
 
@@ -835,9 +845,18 @@ public class E_UserPOM extends TestBase {
 		
 		
 	   
-		String email="FqlEIQ_sree.Team1@gmail.com";
-		wait.until(ExpectedConditions.elementToBeClickable(AssignStudentEmailId));
-		AssignStudentEmailId.click();
+		String email="nsVwVG_sreestudent_team1@gmail.com";
+		//String email=(String) Cache.getData("Student_User");
+		wait.until(ExpectedConditions.elementToBeClickable(AssignStudentEmailId1));
+		AssignStudentEmailId1.click();
+		wait.until(ExpectedConditions.elementToBeClickable(AssignStudentemailarrowdd));
+		AssignStudentemailarrowdd.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		wait.until(ExpectedConditions.elementToBeClickable(AssignStudentDropDownFilter));
 		AssignStudentDropDownFilter.sendKeys(email);
 		WebElement option = driver.findElement(By.xpath("//p-dropdownitem/li/span[contains(text(), '" + email + "')]"));
@@ -847,14 +866,14 @@ public class E_UserPOM extends TestBase {
 	}
 	
 	public void AddProgramNameInDropDown() {
-		String ProgramName="mtestQA";
+		String ProgramName="sreeSDET138";
 		AssignStudentStatusProgramNameDropDown.click();
 		
 		WebElement option = driver.findElement(By.xpath("//span[contains(text(), '" + ProgramName + "')]"));
 		option.click();
 	}
 	public void AddBatchNameInDropDown() {
-		String BatchName="SreevidyaQA11BatchTeam1";
+		String BatchName="sreeSDET138";
 		AssignStudentStatusBatchNameDropDown.click();
 		
 		WebElement option = driver.findElement(By.xpath("//span[contains(text(), '" + BatchName + "')]"));
@@ -865,7 +884,8 @@ public class E_UserPOM extends TestBase {
 		userDetailsClose();
 		//wait.until(ExpectedConditions.elementToBeClickable(AssignStaffEmailId));
 		UserAssignStaff.click();
-		String email="sreestaffm123@gmail.com";
+		String email="PuSwuN_sreestaff_team1@gmail.com";
+		//String email=(String) Cache.getData("Staff_User");
 		wait.until(ExpectedConditions.elementToBeClickable(AssignStaffEmailId)).click();
 		//AssignStaffEmailId.click();
 		
@@ -876,7 +896,7 @@ public class E_UserPOM extends TestBase {
 		//option.click();
 	}
 	public void staffAddProgramNameInDropDown()  {	
-		String ProgramName="mtestQA";
+		String ProgramName="sreeSDET138";
 
 		wait.until(ExpectedConditions.elementToBeClickable(AssignStudentStatusProgramNameDropDown)).click();
 
@@ -890,7 +910,7 @@ public class E_UserPOM extends TestBase {
 
 	}
 	public void staffAddBatchNameInDropDown() {
-		String batchname="mtestQA";
+		String batchname="sreeSDET138";
 		wait.until(ExpectedConditions.elementToBeClickable(AssignStaffStatusBatchNameDropDown)).click();
 		//AssignStaffStatusBatchNameDropDown.click();
 		
@@ -901,6 +921,71 @@ public class E_UserPOM extends TestBase {
 		//wait.until(ExpectedConditions.elementToBeClickable(option));
 		// option.click();
 		//AssignStaffStatusBatchNameCheckBox
+	}
+	
+	/*#########Sort and Delete ########## */
+	@FindBy(xpath = "//*[text() = 'User']")public WebElement userLink;
+	@FindBy(id = "filterGlobal")public WebElement SeachText;
+	@FindBy(xpath = "(//*[@icon = 'pi pi-trash'])[2]")public WebElement btn_delete;
+	
+	@FindBy(xpath = "//*[text() = 'Confirm']") public WebElement heading_delete_confirm;
+	@FindBy(xpath = "//*[text() = 'No']") public WebElement confirm_No_btn;
+	@FindBy(xpath = "//*[text() = 'Yes']") public WebElement confirm_Yes_btn;
+	
+	@FindBy(xpath = "//*[@class = 'p-button-danger p-button p-component p-button-icon-only']")public  WebElement deleteAllbtn;
+	@FindBy(xpath = "(//tr[@class = 'ng-star-inserted'])[2]//td[1]//*[@role = 'checkbox']") WebElement checkbox;
+	
+	@FindBy(xpath = "//*[@field = 'userId']//i")public WebElement userIdSortIcon;
+	@FindBy(xpath = "//*[@field = 'userFirstName']//i")public WebElement userNameSortIcon;
+	@FindBy(xpath = "//*[@field = 'userLocation']//i")public WebElement userLocationSortIcon;
+	@FindBy(xpath = "//*[@field = 'userPhoneNumber']//i")public WebElement userPhoneNumberSortIcon;
+	@FindBy(xpath = "(//*[@type = 'button']//span)[1]")public WebElement startPageLink;
+	
+	@FindBys(value = { @FindBy(how = How.XPATH, using = "//*[@class = 'p-datatable-tbody']//tr//td[2]") })
+	public List<WebElement> userIdsInEachPage;
+	@FindBys(value = { @FindBy(how = How.XPATH, using = "//*[@class = 'p-datatable-tbody']//tr//td[3]") })
+	public List<WebElement> userNamesInEachPage;
+	@FindBys(value = { @FindBy(how = How.XPATH, using = "//*[@class = 'p-datatable-tbody']//tr//td[4]") })
+	public List<WebElement> userLocationInEachPage;
+	@FindBys(value = { @FindBy(how = How.XPATH, using = "//*[@class = 'p-datatable-tbody']//tr//td[5]") })
+	public List<WebElement> userPhonenumberInEachPage;
+	@FindBy(xpath = "//*[text() = 'Batch']")public WebElement batchLink;
+	
+	
+	
+	public void clickOnCheckbox(String recordName) {
+		String dynamicCheckboxpath = "//*[@class = 'p-datatable-tbody']//tr//td[contains(text(),'"+recordName+"')]/preceding-sibling::td[2]//*[@role = 'checkbox']";
+
+		driver.findElement(By.xpath(dynamicCheckboxpath)).click();
+		
+	}
+	public boolean isProgramChecked() {
+		if(checkbox.getAttribute("aria-checked").equalsIgnoreCase("true")) {
+			System.out.println("check box is checked  --" +checkbox.getAttribute("aria-checked"));
+			return true;
+		}
+		return false;
+	}
+	
+	public List<String> getProgramNames(List<WebElement> elements)  {
+	    List<String> programNames = new ArrayList<String>();
+	    boolean hasNextPage = true;
+
+	    do {
+	        for (WebElement program : elements) {
+	            String name = program.getText();
+	            programNames.add(name);
+	        }
+	        try {
+	            WebElement nextPageLink = driver.findElement(By.xpath("//*[@class = 'p-paginator-next p-paginator-element p-link p-ripple']"));
+	            nextPageLink.click();
+	        } catch (NoSuchElementException e) {
+	            hasNextPage = false; 
+	        }
+	    } while (hasNextPage);
+
+	    return programNames;
+	
 	}
 	
 	}

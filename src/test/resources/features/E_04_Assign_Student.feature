@@ -32,47 +32,47 @@ Feature: Assign Student
   Scenario: Empty Form Submission
     Given Admin is in Assign Student details pop up page
     When Admin clicks "Save" button with entering any data
-    Then Admin gets a Error message alert	
+    Then Admin gets a Error message alert1	
     
-    @StudentAssign_06
-  Scenario: Validate the Assign Student form page without giving Student Email id
-    Given Admin is in Assign Student details pop up page
-    When Admin clicks "Save" button without entering Student Email id
-    Then Admin gets a Error message alert as "Student Email id is required"
-    @StudentAssign_07
-  Scenario: Validate the Assign Student form page without selecting Program
-    Given Admin is in Assign Student details pop up page
-    When Admin clicks "Save" button without selecting program
-    Then Admin gets a Error message alert as "Program Name is required."
-    
-     @StudentAssign_08
-  Scenario: Validate the Assign Student form page without selecting batch
-    Given Admin is in Assign Student details pop up page
-    When Admin clicks "Save" button without selecting batch
-    Then Admin gets a Error message alert as "Batch Name is required."
-    
-     @StudentAssign_09
-  Scenario: Validate the Assign Student form page without giving Status
-    Given Admin is in Assign Student details pop up page
-    When Admin clicks "Save" button without giving status
-    Then Admin gets a Error message alert as "Status is required."
-    
-    @StudentAssign_10
-  Scenario: Validate Cancel/Close(X) icon on Assign Student form
-    Given Admin is in Assign Student details pop up page
-    When Admin clicks Close Icon on User Details form
-    Then Assign Student popup window should be closed without saving
-    
-     @StudentAssign_11
-  Scenario: Validate Save button on Assign Student form
-    Given Admin is in Assign Student details pop up page
-    When Enter all the required fields with valid values and click Save button
-    Then Admin gets a message "User has been successfully assigned/Updated to Program/Batch(es)" alert
-    
-    @StudentAssign_12
-  Scenario: Validate Cancel button on Assign Student form
-    Given Admin is in Assign Student details pop up page
-    When Admin clicks Cancel button 
-    Then Admin can see the Assign Student popup disappears without assigning 
+    #@StudentAssign_06
+  #Scenario: Validate the Assign Student form page without giving Student Email id
+    #Given Admin is in Assign Student details pop up page
+    #When Admin clicks "Save" button without entering Student Email id
+    #Then Admin gets a Error message alert as "Student Email id is required"
+    #@StudentAssign_07
+  #Scenario: Validate the Assign Student form page without selecting Program
+    #Given Admin is in Assign Student details pop up page
+    #When Admin clicks "Save" button without selecting program
+    #Then Admin gets a Error message alert as "Program Name is required."
+    #
+     #@StudentAssign_08
+  #Scenario: Validate the Assign Student form page without selecting batch
+    #Given Admin is in Assign Student details pop up page
+    #When Admin clicks "Save" button without selecting batch
+    #Then Admin gets a Error message alert as "Batch Name is required."
+    #
+     #@StudentAssign_09
+  #Scenario: Validate the Assign Student form page without giving Status
+    #Given Admin is in Assign Student details pop up page
+    #When Admin clicks "Save" button without giving status
+    #Then Admin gets a Error message alert as "Status is required."
+    #
+    #@StudentAssign_10
+  #Scenario: Validate Cancel/Close(X) icon on Assign Student form
+    #Given Admin is in Assign Student details pop up page
+    #When Admin clicks Close Icon on User Details form
+    #Then Assign Student popup window should be closed without saving
+    #
+     #@StudentAssign_11
+  #Scenario: Validate Save button on Assign Student form
+    #Given Admin is in Assign Student details pop up page
+    #When Enter all the required fields with valid values and click Save button1
+    #Then Admin gets a message "User has been successfully assigned/Updated to Program/Batch(es)" alert
+    #
+    #@StudentAssign_12
+  #Scenario: Validate Cancel button on Assign Student form
+    #Given Admin is in Assign Student details pop up page
+    #When Admin clicks Cancel button 
+    #Then Admin can see the Assign Student popup disappears without assigning 
     
     

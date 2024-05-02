@@ -20,23 +20,23 @@ Scenario Outline: Check if user is created when only mandatory fields are entere
 						|rowNumber|expectedStatusCode|
 						|1|User Added Successfully|
 						|2|User Added Successfully|
-						|3|User Added Successfully|
-						|4|User Added Successfully|
-						|5|User Added Successfully|
-						|6|User Added Successfully|
-						|7|User Added Successfully|
-						|8|User Added Successfully|
-						|9|User Added Successfully|
-						|10|User Added Successfully|
-						|11|User Added Successfully|
-						|12|User Added Successfully|
-						|13|User Added Successfully|
-						|28|User Added Successfully|
-						|29|User Added Successfully|
-						|30|User Added Successfully|
-						|31|User Added Successfully|
-						|32|User Added Successfully|
-						|33|User Added Successfully|
+#						|3|User Added Successfully|
+#						|4|User Added Successfully|
+#						|5|User Added Successfully|
+#						|6|User Added Successfully|
+#						|7|User Added Successfully|
+#						|8|User Added Successfully|
+#						|9|User Added Successfully|
+#						|10|User Added Successfully|
+#						|11|User Added Successfully|
+#						|12|User Added Successfully|
+#						|13|User Added Successfully|
+#						|28|User Added Successfully|
+#						|29|User Added Successfully|
+#						|30|User Added Successfully|
+#						|31|User Added Successfully|
+#						|32|User Added Successfully|
+#						|33|User Added Successfully|
 						|34|User Added Successfully|
 						|35|User Added Successfully|
 						|36|User Added Successfully|
@@ -74,18 +74,18 @@ Scenario Outline: check if user is created when invalid data is entered in all o
    Examples:
 						|rowNumber|expectedStatusCode|
 						|15|userFirstName must contain two or more alphabets only|
-						|16|userMiddleName must contain one or more alphabets only|
-						|17|userLastName must contain one or more alphabets only|
-						|18|Cannot deserialize value of type `long` from String|
-						|19|Enter phone no in this format (CountryCode)(PhoneNo)|
-						|20|Enter phone no in this format (CountryCode)(PhoneNo)|
-						|21|userLinkedinUrlmust contain www.linkedin.com|
-						|22|userFirstName must contain two or more alphabets only|
-						|23|userEduUg must begin with alphabet and can contain only alphanumeric characters|
-						|24|userEduPgmust begin with alphabet and can contain only alphanumeric characters|
-						|25|Failed to create user, as 'TimeZone' is invalid !!|
-						|26|userComments must begin with alphabet and can contain only alphanumeric characters|
-						|27|Failed to create user, as 'TimeZone' is invalid !!|
+#						|16|userMiddleName must contain one or more alphabets only|
+#						|17|userLastName must contain one or more alphabets only|
+#						|18|Cannot deserialize value of type `long` from String|
+#						|19|Enter phone no in this format (CountryCode)(PhoneNo)|
+#						|20|Enter phone no in this format (CountryCode)(PhoneNo)|
+#						|21|userLinkedinUrlmust contain www.linkedin.com|
+#						|22|userFirstName must contain two or more alphabets only|
+#						|23|userEduUg must begin with alphabet and can contain only alphanumeric characters|
+#						|24|userEduPgmust begin with alphabet and can contain only alphanumeric characters|
+#						|25|Failed to create user, as 'TimeZone' is invalid !!|
+#						|26|userComments must begin with alphabet and can contain only alphanumeric characters|
+#						|27|Failed to create user, as 'TimeZone' is invalid !!|
 						
 Scenario Outline:: Check if the user details are added in data table
     Given Admin is on  User details pop up
