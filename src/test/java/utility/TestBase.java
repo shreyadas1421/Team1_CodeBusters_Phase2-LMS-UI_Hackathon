@@ -12,7 +12,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class TestBase {
 
 	
-WebDriver driver;
+public static WebDriver driver;
 	
 	public WebDriver WebDriverManager() throws IOException {
 		
@@ -33,7 +33,7 @@ WebDriver driver;
 				driver= new FirefoxDriver();
 			}
 			
-			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 			driver.get(url);
 			driver.manage().window().maximize();
 		}

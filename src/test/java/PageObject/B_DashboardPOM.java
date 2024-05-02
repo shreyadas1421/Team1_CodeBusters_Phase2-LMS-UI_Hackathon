@@ -14,11 +14,19 @@ public class B_DashboardPOM {
 
 	public WebDriver driver;
 
-		
+	/*	
 	public B_DashboardPOM(WebDriver driver) {
 		this.driver= driver;
 		PageFactory.initElements(driver, this);
+	}*/
+	
+
+	public void SetDriver(WebDriver driver) {
+		this.driver= driver;
+		PageFactory.initElements(driver, this);
 	}
+	@FindBy(xpath="//span[normalize-space()='LMS - Learning Management System']")
+	public WebElement dashboard;
 	
 	@FindBy(xpath="//div[text()=' Manage Program']") 
 	public WebElement manageProgramTittle;
@@ -38,6 +46,10 @@ public class B_DashboardPOM {
 	@FindBy(xpath="//button[@id='logout']") 
 	public WebElement Logout;
 	
+	public boolean  getDashboard() {
+		
+		return dashboard.isDisplayed();
+	}
 	public String getManageProgramTittle() {
 		
 		return manageProgramTittle.getText();
