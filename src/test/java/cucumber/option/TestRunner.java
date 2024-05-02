@@ -15,10 +15,14 @@ publish=true,
 //		"src/test/resources/features/D_A_BatchPageValidation.feature","src/test/resources/features/D_B_AddNewBatch.feature",
 //		"src/test/resources/features/D_C_EditBatch.feature"},
 //	"src/test/resources/features/E_02_User_Add_New_User.feature","src/test/resources/features/E_03_User_Edit_User.feature"},
+// features={"src/test/resources/features/A_Login.feature","src/test/resources/features/B_Dashboard.feature",
+//		"src/test/resources/features/C_A_ManageProgram.feature","src/test/resources/features/C_B_ManageProgram.feature",
+//		"src/test/resources/features/C_C_ManageProgram.feature","src/test/resources/features/D_A_BatchPageValidation.feature",
+//		"src/test/resources/features/D_B_AddNewBatch.feature","src/test/resources/features/D_C_EditBatch.feature"},
+
 //features={"src/test/resources/features/A_Login.feature","src/test/resources/features/B_Dashboard.feature",
-//		"src/test/resources/features/E_02_User_Add_New_User.feature","src/test/resources/features/E_03_User_Edit_User.feature",
-//		"src/test/resources/features/E_05_Assign_Staff.feature","src/test/resources/features/E_06_User_Sort_Delete.feature",
-//		"src/test/resources/features/F_Program_Delete_Sort.feature"},
+//		"src/test/resources/features/D_A_BatchPageValidation.feature",
+//		"src/test/resources/features/D_B_AddNewBatch.feature","src/test/resources/features/D_C_EditBatch.feature"},
 
 features={"src/test/resources/features"},
 

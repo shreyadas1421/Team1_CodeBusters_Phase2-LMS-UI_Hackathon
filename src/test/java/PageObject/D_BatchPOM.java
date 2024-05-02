@@ -308,7 +308,7 @@ public class D_BatchPOM {
 		// Fill in Program Name
 		// ProgramNamePoupField.click();
 		System.out.println("Batch ProgramNamePoupFieldDrop");
-
+		reusableMethods.explicitWait(ProgramNamePoupFieldDrop);
 		ProgramNamePoupFieldDrop.click();
 
 		try {
@@ -320,8 +320,10 @@ public class D_BatchPOM {
 		if (!ProgramName.isEmpty()) {
 			System.out.println("Batch ProgramName");
 			// Find the option with the desired value and click it
-			WebElement option = driver.findElement(By.xpath("//span[contains(text(), '" + ProgramName + "')]"));
-			reusableMethods.explicitWait(option);
+//			WebElement option = driver.findElement(By.xpath("//span[contains(text(), '" + ProgramName + "')]"));
+//			reusableMethods.explicitWait(option);
+//			option.click();
+			WebElement option = driver.findElement(By.xpath("(//li/span[@class='ng-star-inserted'])[1]"));
 			option.click();
 			System.out.println("Batch ProgramName clickend");
 		}
