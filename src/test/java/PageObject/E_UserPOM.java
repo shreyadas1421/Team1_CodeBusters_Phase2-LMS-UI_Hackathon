@@ -869,7 +869,9 @@ public class E_UserPOM extends TestBase {
 		String ProgramName="sreeSDET138";
 		AssignStudentStatusProgramNameDropDown.click();
 		
-		WebElement option = driver.findElement(By.xpath("//span[contains(text(), '" + ProgramName + "')]"));
+//		WebElement option = driver.findElement(By.xpath("//span[contains(text(), '" + ProgramName + "')]"));
+//		option.click();
+		WebElement option = driver.findElement(By.xpath("(//li/span[@class='ng-star-inserted'])[1]"));
 		option.click();
 	}
 	public void AddBatchNameInDropDown() {
@@ -882,7 +884,7 @@ public class E_UserPOM extends TestBase {
 	public void staffAddEmailInDropDown()  {
 		wait.until(ExpectedConditions.visibilityOf(save));	
 		userDetailsClose();
-		//wait.until(ExpectedConditions.elementToBeClickable(AssignStaffEmailId));
+		wait.until(ExpectedConditions.elementToBeClickable(UserAssignStaff));
 		UserAssignStaff.click();
 		String email="PuSwuN_sreestaff_team1@gmail.com";
 		//String email=(String) Cache.getData("Staff_User");

@@ -540,6 +540,7 @@ public class userStepDef extends E_UserPOM{
 
 	@When("Admin clicks {string} button without entering Student Email id")
 	public void admin_clicks_button_without_entering_student_email_id(String string) {
+		wait.until(ExpectedConditions.elementToBeClickable(AssignStudentActiveRadioButton));
 		AssignStudentActiveRadioButton.click();
 		//wait.until(ExpectedConditions.elementToBeClickable(save));
 		save.click();
@@ -589,6 +590,7 @@ public class userStepDef extends E_UserPOM{
 		wait.until(ExpectedConditions.elementToBeClickable(UserAssignStudent));
 		 UserAssignStudent.click();
 		AddEmailIdInDropDown();
+		wait.until(ExpectedConditions.elementToBeClickable(AssignStudentActiveRadioButton));
 		AssignStudentActiveRadioButton.click();
 		wait.until(ExpectedConditions.elementToBeClickable(save));
 		save.click();
