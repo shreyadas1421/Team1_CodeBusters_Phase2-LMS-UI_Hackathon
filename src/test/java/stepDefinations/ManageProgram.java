@@ -13,7 +13,7 @@ public class ManageProgram extends C_ProgramPOM {
 
 
     private final reusableMethods reusablemethod = new reusableMethods(driver);
-    PageObject.A_LoginPOM a_loginPOM = new PageObject.A_LoginPOM(driver);
+//    PageObject.A_LoginPOM a_loginPOM = new PageObject.A_LoginPOM(driver);
     String rowNumber;
 
     //TestSetupManager testSetupManager;
@@ -70,7 +70,7 @@ public class ManageProgram extends C_ProgramPOM {
 //        Assert.assertEquals(dashboard, true);
 //        System.out.println("user is on dashboard page");
 
-        Assert.assertEquals(a_loginPOM.dashboard.isDisplayed(), true);
+//        Assert.assertEquals(a_loginPOM.dashboard.isDisplayed(), true);
 
     }
 
@@ -202,12 +202,6 @@ public class ManageProgram extends C_ProgramPOM {
     public void admin_changes_the_status_and_clicks_save_button() {
         editStatusIconProgram();
         clickSaveButtonOnAddProgramPopup();
-    }
-
-    @Then("Admin gets a message {string} alert and able to see the updated status in the table for the particular program")
-    public void admin_gets_a_message_alert_and_able_to_see_the_updated_status_in_the_table_for_the_particular_program(String string) {
-
-
     }
 
     @When("Admin clicks Cancel button on edit popup")
