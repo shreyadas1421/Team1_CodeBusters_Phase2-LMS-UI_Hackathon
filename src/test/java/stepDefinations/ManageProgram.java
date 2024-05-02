@@ -14,6 +14,7 @@ public class ManageProgram extends C_ProgramPOM {
 
     private final reusableMethods reusablemethod = new reusableMethods(driver);
     PageObject.A_LoginPOM a_loginPOM = new PageObject.A_LoginPOM(driver);
+    String rowNumber;
 
     //TestSetupManager testSetupManager;
 //    C_ProgramPOM c_programPOM;
@@ -325,7 +326,7 @@ public class ManageProgram extends C_ProgramPOM {
     @Then("Admin gets a message Successful Program Created alert and able to see the new program added in the data table")
     public void admin_gets_a_message_alert_and_able_to_see_the_new_program_added_in_the_data_table() throws InterruptedException {
         Assert.assertEquals(programCreationMsgValidation(), "Program Created Successfully");
-
+        utilities.Cache.setData("programName_"+rowNumber,programName);
     }
 
     @When("Admin clicks <Cancel>button")
@@ -355,9 +356,8 @@ public class ManageProgram extends C_ProgramPOM {
     }
 
     @When("Enter all the required fields with valid values by reading through excel {string}, {string} and click Save button")
-    public void enterAllTheRequiredFieldsWithValidValuesByReadingThroughExcelAndClickSaveButton(String sheetName, String rowNumber) {
-        System.out.println(sheetName);
-        System.out.println(rowNumber);
+    public void enterAllTheRequiredFieldsWithValidValuesByReadingThroughExcelAndClickSaveButton(String sheetName, String rowNum) {
+        rowNumber = rowNum;
         readProgramInfoFromExcel(sheetName, Integer.parseInt(rowNumber));
         clickSavebuttonProgram();
     }

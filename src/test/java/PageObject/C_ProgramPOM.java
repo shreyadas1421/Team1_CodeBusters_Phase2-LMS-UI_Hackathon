@@ -68,6 +68,7 @@ public class C_ProgramPOM extends TestBase {
     Map<String, String> excelmap;
     Set hashset = new HashSet();
     String actualMsg = "";
+    public String programName = "";
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
 
     public void clickProgramLink() {
@@ -186,6 +187,7 @@ public class C_ProgramPOM extends TestBase {
     public String programCreationMsgValidation() throws InterruptedException {
         WebElement msg = driver.findElement(By.xpath("//p-toast//div[contains(@class, 'p-toast-detail')]"));
         actualMsg = msg.getText();
+
         return actualMsg;
     }
 
@@ -289,7 +291,9 @@ public class C_ProgramPOM extends TestBase {
         excelmap = datamap.getTestData(sheetname, rowNumber);
         String randomString = randomEndForValue();
 
-        programDetailNameTextBox.sendKeys(excelmap.get("ProgramName").concat(randomString));
+        programName = excelmap.get("ProgramName").concat(randomString);
+
+        programDetailNameTextBox.sendKeys(programName);
         programDetailDescriptionTextBox.sendKeys(excelmap.get("ProgramDescription").concat(randomString));
         clickOnRadioButtonOnManageProgramPopup(excelmap.get("Status"));
 
